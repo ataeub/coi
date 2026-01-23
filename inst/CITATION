@@ -1,0 +1,7 @@
+bibentry(
+  bibtype = "Unpublished",
+  title = "coi: A R-library to extract tree crown interaction metrics.",
+  author = "Alexander Täuber",
+  year = 2026,
+  note = "This package has been developed for the paper Täuber et al. (2026) in prep."
+  )

@@ -1,0 +1,29 @@
+Package: coi
+Title: Extract Tree-Tree Interaction Metrics from TLS Point Clouds
+Version: 0.0.0.9000
+Authors@R: 
+    person("Alexander", "Täuber", , "alexander.taeuber@idiv.de", role = c("aut", "cre", "cph"))
+Description: 
+    The `coi` package can extract three metrics relevant for physical tree-tree interactions
+    from point clouds representing trees. Namely the crown overlap index (COI), which gives the package its name
+    and is described in Täuber et al. (2026) in prep. The crown complementarity index (CCI) as described in
+    Williams et al. (2017). And the box dimension structural complexity
+    as described in Seidel (2018).
+URL: https://github.com/ataeub/coi
+BugReports: https://github.com/ataeub/coi/issues
+License: AGPL (>= 3)
+Encoding: UTF-8
+Imports: 
+    RANN,
+    concaveman,
+    grDevices
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests: 
+    knitr,
+    rmarkdown,
+    viridis,
+    scales,
+    Rvcg,
+    ggplot2
+VignetteBuilder: knitr
