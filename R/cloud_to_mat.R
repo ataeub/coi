@@ -18,8 +18,8 @@
 #' sphere <- gen_sphere(1, 0.05)
 #' sphere <- as.data.frame(sphere)
 #' sphere$extra_data <- 1
-#' cloud_to_vector(sphere, "xy")
-cloud_to_vector <- function(input, which = "xyz") {
+#' sphere_mat <- cloud_to_mat(sphere, "xy")
+cloud_to_mat <- function(input, which = "xyz") {
   xyz_c <- c("x", "y", "z")
   which <- unlist(strsplit(which, ""))
   if (!all(which %in% xyz_c)) {

@@ -31,8 +31,8 @@
 #' sphere2 <- gen_sphere(1, 0.01, c(0, 0.5, 0))
 #' coi(sphere1, sphere2, 0.3, 0.05)
 coi <- function(cloud_i, cloud_j, d_max, vox_res = NULL, warnings = TRUE) {
-  cloud_i <- cloud_to_vector(cloud_i)
-  cloud_j <- cloud_to_vector(cloud_j)
+  cloud_i <- cloud_to_mat(cloud_i)
+  cloud_j <- cloud_to_mat(cloud_j)
 
   if (!is.null(vox_res) && is.numeric(vox_res)) {
     cloud_i <- voxelize(cloud_i, vox_res)

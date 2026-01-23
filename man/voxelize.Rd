@@ -20,5 +20,5 @@ point clouds.
 }
 \examples{
 sphere <- gen_sphere(1, 0.01)
-voxelize(sphere, 0.05)
+sphere_v <- voxelize(sphere, 0.05)
 }

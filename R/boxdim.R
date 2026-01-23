@@ -17,7 +17,7 @@
 #' sphere <- gen_sphere(1, 0.01, c(0, 0, 0))
 #' boxdim(sphere, 0.1, 0.05)
 boxdim <- function(cloud, threshold, vox_res = NULL, warnings = TRUE) {
-  cloud <- cloud_to_vector(cloud)
+  cloud <- cloud_to_mat(cloud)
 
   if (!is.null(vox_res) && is.numeric(vox_res)) {
     cloud <- voxelize(cloud, vox_res)

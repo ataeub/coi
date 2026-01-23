@@ -19,7 +19,7 @@
 #' @examples
 #' sphere1 <- gen_sphere(1, 0.05, c(0, 0, 0))
 #' sphere2 <- gen_sphere(1, 0.05, c(0, 0.5, 0))
-#' extract_interaction(sphere1, sphere2, d_max = 0.5)
+#' spheres_dists <- extract_interaction(sphere1, sphere2, d_max = 0.5)
 extract_interaction <- function(
   cloud_i,
   cloud_j,

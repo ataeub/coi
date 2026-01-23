@@ -22,5 +22,5 @@ Generate an artifical voxelized point cloud of a sphere.
 }
 \examples{
 # Generate 1 meter sphere with 5 cm voxel resolution at center (1,2,3)
-gen_sphere(1, 0.05, c(1, 2, 3))
+sphere <- gen_sphere(1, 0.05, c(1, 2, 3))
 }

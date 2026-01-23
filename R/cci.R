@@ -36,8 +36,8 @@ cci <- function(
 ) {
   hull_type <- match.arg(hull_type)
 
-  cloud_i <- cloud_to_vector(cloud_i)
-  cloud_j <- cloud_to_vector(cloud_j)
+  cloud_i <- cloud_to_mat(cloud_i)
+  cloud_j <- cloud_to_mat(cloud_j)
 
   if (!is.null(vox_res) && is.numeric(vox_res)) {
     cloud_i <- voxelize(cloud_i, vox_res)

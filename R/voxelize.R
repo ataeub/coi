@@ -9,7 +9,7 @@
 #' @return The voxelized point cloud as a matrix with columns "x", "y", "z".
 #' @examples
 #' sphere <- gen_sphere(1, 0.01)
-#' voxelize(sphere, 0.05)
+#' sphere_v <- voxelize(sphere, 0.05)
 voxelize <- function(cloud, res) {
   out <- unique(.round_n(cloud, res))
   out
