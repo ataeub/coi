@@ -1,0 +1,43 @@
+# Compute the box dimension structural complexity index for a given point cloud.
+
+Calculate the box dimension as described in Seidel et al. (2018)
+
+## Usage
+
+``` r
+boxdim(cloud, threshold, vox_res = NULL, warnings = TRUE)
+```
+
+## Arguments
+
+- cloud:
+
+  Point cloud as a matrix-like object.
+
+- threshold:
+
+  The lower resolution threshold until which the box dimension algorithm
+  iterates
+
+- vox_res:
+
+  Numeric of the resolution for voxelization. If left undefined
+  (default), the raw cloud will be analzed, which should only be done if
+  the cloud has been voxelized before independently.
+
+- warnings:
+
+  Logical controlling whether to display a warning when vox_res is left
+  undefined. Defaults to TRUE.
+
+## Value
+
+A numeric representing the box dimension.
+
+## Examples
+
+``` r
+sphere <- gen_sphere(1, 0.01, c(0, 0, 0))
+boxdim(sphere, 0.1, 0.05)
+#> [1] 2.406308
+```

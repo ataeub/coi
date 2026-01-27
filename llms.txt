@@ -1,0 +1,56 @@
+# `coi` - A library to extract tree-tree interaction metrics from TLS point clouds within R.
+
+`coi` is a small library can extract three metrics relevant for physical
+tree-tree interactions from point clouds representing trees. Namely the
+crown overlap index (COI), which gives the package its Name and is
+described in Täuber et al. (2026) in prep. The crown complementarity
+index (CCI) as described in [Williams et
+al. (2017)](https://doi.org/10.1038/s41559-016-0063). And the box
+dimension structural complexity as described in [Seidel
+(2018)](https://doi.org/10.1002/ece3.3661).
+
+## Installation
+
+You can install `coi` by running:
+
+    # install.packages("devtools")
+    devtools::install_github("ataeub/coi")
+
+## Usage
+
+For an intro to the usage of the library please refer to this
+[vignette](https://ataeub.github.io/coi/vignettes/coi_demonstration.md).
+For a more thorough explanation of the underlying algorithms you can
+refer to the paper Täuber et al. (2026) in prep.
+
+# Package index
+
+## All functions
+
+- [`boxdim()`](https://ataeub.github.io/coi/reference/boxdim.md) :
+  Compute the box dimension structural complexity index for a given
+  point cloud.
+- [`cci()`](https://ataeub.github.io/coi/reference/cci.md) : Compute the
+  crown complementarity index (CCI) for two raw single tree point
+  clouds.
+- [`cloud_to_mat()`](https://ataeub.github.io/coi/reference/cloud_to_mat.md)
+  : Homogenize a given point cloud from any tabular format to a 3-column
+  matrix.
+- [`coi()`](https://ataeub.github.io/coi/reference/coi.md) : Compute the
+  crown overlap index (COI) for two raw single tree point clouds.
+- [`compute_coi()`](https://ataeub.github.io/coi/reference/compute_coi.md)
+  : Compute the crown overlap index (COI) for a vector with interaction
+  distances.
+- [`extract_interaction()`](https://ataeub.github.io/coi/reference/extract_interaction.md)
+  : Extract interaction distances between two point clouds.
+- [`gen_sphere()`](https://ataeub.github.io/coi/reference/gen_sphere.md)
+  : Generate an artifical voxelized point cloud of a sphere.
+- [`voxelize()`](https://ataeub.github.io/coi/reference/voxelize.md) :
+  Voxelize matrix-like point cloud objects.
+
+# Articles
+
+### All vignettes
+
+- [How to use the \`coi\`
+  library](https://ataeub.github.io/coi/articles/coi_demonstration.md):
