@@ -17,5 +17,5 @@ devtools::install_github("ataeub/coi")
 
 ## Usage
 
-For an intro to the usage of the library please refer to this [vignette](vignettes/coi_demonstration.html).
+For an intro to the usage of the library please refer to this [vignette](https://ataeub.github.io/coi/articles/coi_demonstration.html).
 For a more thorough explanation of the underlying algorithms you can refer to the paper Täuber et al. (2026) in prep. 

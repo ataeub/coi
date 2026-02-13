@@ -1,6 +1,6 @@
 # Compute the crown overlap index (COI) for a vector with interaction distances.
 
-Calculate the COI as described in Täuber et al. 2026 in prep. Bare
+Calculate the COI as described in Täuber et al. (in prep.) Bare
 calculation fcunction requiring interaction distanes pre-computed with
 [`extract_interaction()`](https://ataeub.github.io/coi/reference/extract_interaction.md).
 For an all-in-one function you can use on raw single tree point clouds

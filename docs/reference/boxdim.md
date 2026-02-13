@@ -39,5 +39,5 @@ A numeric representing the box dimension.
 ``` r
 sphere <- gen_sphere(1, 0.01, c(0, 0, 0))
 boxdim(sphere, 0.1, 0.05)
-#> [1] 2.406308
+#> [1] 2.41
 ```

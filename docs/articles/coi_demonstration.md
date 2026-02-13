@@ -6,7 +6,7 @@ The `coi` package is a small tool to calculate some metrics from
 terrestrial laser scanning (TLS) point clouds. The name `coi` stands for
 “crown overlap index” and is one of the metrics that can be extracted
 with the package. The COI is calculated as described in Täuber et
-al. (2026) in prep.
+al. (in prep.)
 
 It was inspired by an earlier index called crown complementarity index
 (CCI), which was presented by [Williams et
@@ -254,12 +254,12 @@ boxdim(
   vox_res = NULL,
   warnings = FALSE
 )
-#> [1] 2.272419
+#> [1] 2.27
 boxdim(
   cloud = sphere_b,
   threshold = threshold,
   vox_res = NULL,
   warnings = FALSE
 )
-#> [1] 2.367149
+#> [1] 2.37
 ```
