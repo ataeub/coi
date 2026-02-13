@@ -6,7 +6,7 @@ Authors@R:
 Description: 
     The `coi` package can extract three metrics relevant for physical tree-tree interactions
     from point clouds representing trees. Namely the crown overlap index (COI), which gives the package its name
-    and is described in Täuber et al. (2026) in prep. The crown complementarity index (CCI) as described in
+    and is described in Täuber et al. (in prep.) The crown complementarity index (CCI) as described in
     Williams et al. (2017). And the box dimension structural complexity
     as described in Seidel (2018).
 URL: https://github.com/ataeub/coi, https://ataeub.github.io/coi/

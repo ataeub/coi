@@ -20,7 +20,7 @@ the interaction distances with \code{extract_interaction()}.}
 Numeric representing the COI.
 }
 \description{
-Calculate the COI as described in Täuber et al. 2026 in prep. Bare
+Calculate the COI as described in Täuber et al. (in prep.) Bare
 calculation fcunction requiring interaction distanes pre-computed with
 \code{extract_interaction()}. For an all-in-one function you can use on raw single
 tree point clouds use \code{coi()}.

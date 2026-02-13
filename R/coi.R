@@ -1,6 +1,6 @@
 #' Compute the crown overlap index (COI) for two raw single tree point clouds.
 #'
-#' Calculate the COI as described in Täuber et al. 2026 in prep. All-in-one
+#' Calculate the COI as described in Täuber et al. (in prep.) All-in-one
 #' function handling voxelization, interaction extraction, and calculation of
 #' COI.
 #'
