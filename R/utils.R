@@ -11,7 +11,7 @@
 # the query cloud will be compared against.
 # @param max_dist Numeric of an optional maximum distance for the
 # calculation. Points above this threshold will be discarded.
-# @returns Matrix of cloud_query with an additional column named "distance" 
+# @returns Matrix of cloud_query with an additional column named "distance"
 # with the distances per point to cloud_ref
 # @export
 # @examples
