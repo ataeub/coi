@@ -180,3 +180,27 @@
   area <- 0.5 * abs(sum(x[-1] * y[-length(y)] - x[-length(x)] * y[-1]))
   area
 }
+
+# Compute the Gini coefficient of inequality for a numeric vector.
+#
+# The Gini coefficient ranges from 0 (perfect equality) to 1 (perfect inequality).
+# Commonly used to measure statistical dispersion or concentration.
+#
+# @param x Numeric vector to compute Gini coefficient for.
+# @returns Numeric of the Gini coefficient, ranging from 0 to 1.
+# @examples
+# x <- c(1, 2, 3, 4, 5)
+# coi:::.gini(x)
+.gini <- function(x) {
+  x <- as.numeric(na.omit(x))
+  n <- length(x)
+  if (n <= 1) {
+    return(NA_real_)
+  }
+  if (sum(x) == 0) {
+    return(0)
+  }
+  x_sorted <- sort(x)
+  gini_coef <- (2 * sum(seq_len(n) * x_sorted)) / (n * sum(x_sorted)) - (n + 1) / n
+  max(0, min(1, gini_coef)) # Clamp to [0, 1]
+}
