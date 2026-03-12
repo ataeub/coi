@@ -55,13 +55,16 @@
 <div class="page-header"><h1 id="coi---a-library-to-extract-tree-tree-interaction-metrics-from-tls-point-clouds-within-r">
 <code>coi</code> - A library to extract tree-tree interaction metrics from TLS point clouds within R.<a class="anchor" aria-label="anchor" href="#coi---a-library-to-extract-tree-tree-interaction-metrics-from-tls-point-clouds-within-r"></a>
 </h1></div>
-<p><code>coi</code> is a small library can extract three metrics relevant for physical tree-tree interactions from point clouds representing trees. Namely the crown overlap index (COI), which gives the package its Name and is described in Täuber et al. (in prep.) The crown complementarity index (CCI) as described in <a href="https://doi.org/10.1038/s41559-016-0063" class="external-link">Williams et al. (2017)</a>. And the box dimension structural complexity as described in <a href="https://doi.org/10.1002/ece3.3661" class="external-link">Seidel (2018)</a>.</p>
+<p><code>coi</code> is a small library can extract three metrics relevant for physical tree-tree interactions from point clouds representing trees. Namely the crown overlap index (COI), which gives the package its Name and is described in <a href="https://dx.doi.org/10.2139/ssrn.6366401" class="external-link">Täuber et al. (in prep.)</a> The crown complementarity index (CCI) as described in <a href="https://doi.org/10.1038/s41559-016-0063" class="external-link">Williams et al. (2017)</a>. And the box dimension structural complexity as described in <a href="https://doi.org/10.1002/ece3.3661" class="external-link">Seidel (2018)</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install <code>coi</code> by running:</p>
-<pre><code><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ataeub/coi"</span><span class="op">)</span></span></code></pre>
+<p>You can install the latest version of <code>coi</code> by running:</p>
+<pre><code><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ataeub/coi"</span>, ref <span class="op">=</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/github_refs.html" class="external-link">github_release</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<p>If you want to install the first version of <code>coi</code> which was used in <a href="https://dx.doi.org/10.2139/ssrn.6366401" class="external-link">Täuber et al. (in prep.)</a>, run:</p>
+<pre><code><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ataeub/coi"</span>, ref <span class="op">=</span> <span class="st">"v1.0.0"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>

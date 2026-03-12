@@ -36,5 +36,4 @@ sphere <- gen_sphere(1, 0.05)
 sphere <- as.data.frame(sphere)
 sphere$extra_data <- 1
 sphere_mat <- cloud_to_mat(sphere, "xy")
-#> Error in cloud_to_mat(sphere, "xy"): could not find function "cloud_to_mat"
 ```

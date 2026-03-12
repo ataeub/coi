@@ -254,12 +254,12 @@ boxdim(
   vox_res = NULL,
   warnings = FALSE
 )
-#> [1] 2.27
+#> [1] 2.272419
 boxdim(
   cloud = sphere_b,
   threshold = threshold,
   vox_res = NULL,
   warnings = FALSE
 )
-#> [1] 2.37
+#> [1] 2.367149
 ```
