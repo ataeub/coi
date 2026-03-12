@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/ataeub/coi/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/ataeub/coi/blob/v1.0.0/inst/CITATION)
 
 Täuber A (2026). “coi: A R-library to extract tree crown interaction
 metrics.” This package has been developed for the paper Täuber et al.
