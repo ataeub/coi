@@ -66,6 +66,9 @@ enl <- function(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title =
   enl2 <- 1 / sum(weighted_2)
 
   if (plot) {
+    if (!requireNamespace("ggplot2", quietly = TRUE)) {
+      stop("Package 'ggplot2' is required for plotting. Install it with install.packages('ggplot2').")
+    }
     if (is.null(plot_title)) {
       plot_title <- "Vertical voxel distribution"
     }
