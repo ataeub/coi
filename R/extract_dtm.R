@@ -1,4 +1,37 @@
+#' @title Extract digital terrain model from point cloud
+#'
+#' @description
+#' Extracts a digital terrain model (DTM) mesh from a point cloud by computing
+#' the minimum Z value within each grid cell and triangulating the result.
+#'
+#' @details
+#' The function divides the point cloud into a regular grid based on the resolution
+#' parameter, extracts the minimum Z value (ground elevation) for each cell, and
+#' creates a Delaunay triangulation mesh from these ground points. Optional smoothing
+#' can be applied to the resulting mesh using various smoothing algorithms.
+#'
+#' @param cloud (matrix or data.frame) Point cloud with columns "x", "y", "z".
+#' @param res (numeric) Grid cell resolution for DTM extraction. Determines the spacing
+#'   of ground points in the resulting mesh.
+#' @param sm_type (character) Smoothing algorithm type; passed to `Rvcg::vcgSmooth()`.
+#'   Options include "taubin", "laplace", "fuhrmann", etc. Default: NULL
+#' @param sm_i (integer) Number of smoothing iterations. Default: NULL
+#' @param sm_lambda (numeric) Smoothing lambda parameter. Default: NULL
+#' @param sm_mu (numeric) Smoothing mu parameter. Default: NULL
+#' @param sm_delta (numeric) Smoothing delta parameter. Default: NULL
+#'
+#' @return (mesh3d) A 3D mesh object representing the DTM surface, suitable for use
+#'   with `z_normalize()` or visualization with `rgl::shade3d()`.
+#'
 #' @export
+#' @examples
+#' \dontrun{
+#' cloud <- gen_sphere(50, 1)
+#' dtm <- extract_dtm(cloud, res = 2)
+#' # Visualize the DTM
+#' rgl::shade3d(dtm, col = "gray")
+#' }
+#'
 extract_dtm <- function(
   cloud,
   res,
