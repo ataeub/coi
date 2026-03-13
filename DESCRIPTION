@@ -17,16 +17,21 @@ Imports:
     RANN,
     concaveman,
     grDevices,
-    stats
+    rlang,
+    stats,
+    utils
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 
-    knitr,
-    rmarkdown,
-    viridis,
-    scales,
-    Rvcg,
+    geometry,
     ggplot2,
-    testthat (>= 3.0.0)
+    knitr,
+    rgl,
+    rlas,
+    rmarkdown,
+    Rvcg,
+    scales,
+    testthat (>= 3.0.0),
+    viridis
 Config/testthat/edition: 3
 VignetteBuilder: knitr
