@@ -32,7 +32,7 @@ cci <- function(
   strata_size,
   hull_type = c("concave", "convex"),
   vox_res = NULL,
-  warnings
+  warnings = TRUE
 ) {
   hull_type <- match.arg(hull_type)
 
