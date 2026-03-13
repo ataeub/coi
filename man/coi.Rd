@@ -7,9 +7,11 @@
 coi(cloud_i, cloud_j, d_max, vox_res = NULL, warnings = TRUE)
 }
 \arguments{
-\item{cloud_i}{First single tree point cloud as a matrix-like object.}
+\item{cloud_i}{First single tree point cloud as a \code{pt_cld} object
+(see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
-\item{cloud_j}{Second single tree point cloud as a matrix-like object.}
+\item{cloud_j}{Second single tree point cloud as a \code{pt_cld} object
+(see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
 \item{d_max}{Numeric of the maximum distance of interaction. Decides how far
 away points of one tree can be from the other before they are excluded from

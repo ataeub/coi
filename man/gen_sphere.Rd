@@ -15,7 +15,7 @@ gen_sphere(r, res, center = c(0, 0, 0))
 cloud.}
 }
 \value{
-A point cloud as a matrix with columns "x", "y", "z".
+A \code{pt_cld} object.
 }
 \description{
 Generate an artifical voxelized point cloud of a sphere.

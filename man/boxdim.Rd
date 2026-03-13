@@ -8,7 +8,7 @@ cloud.}
 boxdim(cloud, threshold, vox_res = NULL, warnings = TRUE)
 }
 \arguments{
-\item{cloud}{Point cloud as a matrix-like object.}
+\item{cloud}{A \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
 \item{threshold}{The lower resolution threshold until which the box dimension
 algorithm iterates}

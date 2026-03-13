@@ -7,12 +7,12 @@
 voxelize(cloud, res)
 }
 \arguments{
-\item{cloud}{The point cloud to voxelize as a matrix-like object.}
+\item{cloud}{A \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
 \item{res}{Numeric of the voxel resolution to apply on the point cloud.}
 }
 \value{
-The voxelized point cloud as a matrix with columns "x", "y", "z".
+A \code{pt_cld} object with the voxelized point cloud.
 }
 \description{
 This is a simple round-to-multiple function which can be used to voxelize

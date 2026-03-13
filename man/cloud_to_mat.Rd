@@ -2,7 +2,7 @@
 % Please edit documentation in R/cloud_to_mat.R
 \name{cloud_to_mat}
 \alias{cloud_to_mat}
-\title{Homogenize a given point cloud from any tabular format to a 3-column matrix.}
+\title{Convert tabular data to a point cloud matrix}
 \usage{
 cloud_to_mat(input, which = "xyz")
 }
@@ -14,19 +14,14 @@ Consists of the 1 to 3 characters "x", "y", or "z". Defaults to "xyz"
 returning all columns.}
 }
 \value{
-A matrix with 1 to 3 columns named "x", "y", "z" representing the
-point cloud
+A \code{pt_cld} object (when \code{which = "xyz"}) or a matrix subset.
 }
 \description{
-Turns any tabular data (data.frame, matrix, tibble) into a 3-column matrix.
-This format is used throughout this package. Additional columns other than
-x, y, z will be removed.
-Simple tabular data such as xyz point clouds are computed multiples faster
-within algorithms in R when compared against data.frames and friends.
+\code{cloud_to_mat()} is deprecated. Use \code{\link[=as_pt_cld]{as_pt_cld()}} or \code{\link[=pt_cld]{pt_cld()}} instead,
+which return a proper \code{pt_cld} class object.
 }
 \examples{
 sphere <- gen_sphere(1, 0.05)
 sphere <- as.data.frame(sphere)
-sphere$extra_data <- 1
-sphere_mat <- cloud_to_mat(sphere, "xy")
+cloud <- as_pt_cld(sphere)
 }
