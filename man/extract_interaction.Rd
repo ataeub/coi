@@ -7,9 +7,9 @@
 extract_interaction(cloud_i, cloud_j, d_max, returns = c("distances", "cloud"))
 }
 \arguments{
-\item{cloud_i}{First point cloud as a matrix-like object.}
+\item{cloud_i}{First point cloud as a \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
-\item{cloud_j}{Second point cloud as a matrix-like object.}
+\item{cloud_j}{Second point cloud as a \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
 \item{d_max}{Numeric of the maximum distance to consider for nearest neighbor
 search.}

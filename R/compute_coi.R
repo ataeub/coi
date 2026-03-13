@@ -30,6 +30,10 @@
 #' i_dists <- extract_interaction(sphere1_v, sphere2_v, d_max)
 #' compute_coi(i_dists, size_total, d_max)
 compute_coi <- function(distances, size_weight, d_max) {
+  if (length(distances) == 0) {
+    warning("No overlap detected between the analyzed clouds.")
+    return(0)
+  }
   distances_max <- max(distances)
   distances_min <- min(distances)
   if (distances_min < 0) {

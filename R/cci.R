@@ -7,8 +7,10 @@
 #' Takes two raw point clouds representing interacting trees
 #' and voxelizes them to a given common point density. Then CCI is computed.
 #'
-#' @param cloud_i First single tree point cloud as a matrix-like object.
-#' @param cloud_j Second single tree point cloud as a matrix-like object.
+#' @param cloud_i First single tree point cloud as a `pt_cld` object
+#'   (see [as_pt_cld()]).
+#' @param cloud_j Second single tree point cloud as a `pt_cld` object
+#'   (see [as_pt_cld()]).
 #' @param strata_size Numeric of the size of the vertical strata used within the
 #' CCI algorithm. See Details and Williams et al. 2017.
 #' @param hull_type String controlling the type of hull algorithm used to
@@ -32,12 +34,12 @@ cci <- function(
   strata_size,
   hull_type = c("concave", "convex"),
   vox_res = NULL,
-  warnings
+  warnings = TRUE
 ) {
   hull_type <- match.arg(hull_type)
 
-  cloud_i <- cloud_to_mat(cloud_i)
-  cloud_j <- cloud_to_mat(cloud_j)
+  .validate_pt_cld(cloud_i, "cloud_i")
+  .validate_pt_cld(cloud_j, "cloud_j")
 
   if (!is.null(vox_res) && is.numeric(vox_res)) {
     cloud_i <- voxelize(cloud_i, vox_res)

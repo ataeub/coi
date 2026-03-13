@@ -4,7 +4,7 @@
 #' @param res Numeric of the voxel resolution of the cloud.
 #' @param center Three element vector (x, y, z) of the center point of the
 #' cloud.
-#' @return A point cloud as a matrix with columns "x", "y", "z".
+#' @return A `pt_cld` object.
 #' @export
 #' @examples
 #' # Generate 1 meter sphere with 5 cm voxel resolution at center (1,2,3)
@@ -24,5 +24,5 @@ gen_sphere <- function(r, res, center = c(0, 0, 0)) {
 
   colnames(sphere) <- c("x", "y", "z")
 
-  sphere
+  pt_cld(sphere)
 }

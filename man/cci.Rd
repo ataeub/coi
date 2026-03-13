@@ -11,13 +11,15 @@ cci(
   strata_size,
   hull_type = c("concave", "convex"),
   vox_res = NULL,
-  warnings
+  warnings = TRUE
 )
 }
 \arguments{
-\item{cloud_i}{First single tree point cloud as a matrix-like object.}
+\item{cloud_i}{First single tree point cloud as a \code{pt_cld} object
+(see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
-\item{cloud_j}{Second single tree point cloud as a matrix-like object.}
+\item{cloud_j}{Second single tree point cloud as a \code{pt_cld} object
+(see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
 \item{strata_size}{Numeric of the size of the vertical strata used within the
 CCI algorithm. See Details and Williams et al. 2017.}
