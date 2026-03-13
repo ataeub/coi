@@ -1,39 +1,28 @@
-#' Homogenize a given point cloud from any tabular format to a 3-column matrix.
+#' Convert tabular data to a point cloud matrix
 #'
-#' Turns any tabular data (data.frame, matrix, tibble) into a 3-column matrix.
-#' This format is used throughout this package. Additional columns other than
-#' x, y, z will be removed.
-
-#' Simple tabular data such as xyz point clouds are computed multiples faster
-#' within algorithms in R when compared against data.frames and friends.
-
+#' @description
+#' `cloud_to_mat()` is deprecated. Use [as_pt_cld()] or [pt_cld()] instead,
+#' which return a proper `pt_cld` class object.
+#'
 #' @param input Any tabular data representing a point cloud.
 #' @param which A string to decide which point columns the function returns.
 #' Consists of the 1 to 3 characters "x", "y", or "z". Defaults to "xyz"
 #' returning all columns.
-#' @returns A matrix with 1 to 3 columns named "x", "y", "z" representing the
-#' point cloud
+#' @returns A `pt_cld` object (when `which = "xyz"`) or a matrix subset.
 #' @export
 #' @examples
 #' sphere <- gen_sphere(1, 0.05)
 #' sphere <- as.data.frame(sphere)
-#' sphere$extra_data <- 1
-#' sphere_mat <- cloud_to_mat(sphere, "xy")
+#' cloud <- as_pt_cld(sphere)
 cloud_to_mat <- function(input, which = "xyz") {
-  xyz_c <- c("x", "y", "z")
-  which <- unlist(strsplit(which, ""))
-  if (!all(which %in% xyz_c)) {
+  .Deprecated("as_pt_cld")
+  cloud <- as_pt_cld(input)
+  which_cols <- unlist(strsplit(which, ""))
+  if (!all(which_cols %in% c("x", "y", "z"))) {
     stop("which must be a string containing a combination of x, y, and z")
   }
-  if (!is.matrix(input)) {
-    input <- as.matrix(input)
+  if (identical(sort(which_cols), c("x", "y", "z"))) {
+    return(cloud)
   }
-  mat <- input[, 1:3]
-  storage.mode(mat) <- "numeric"
-  if (any(is.na(mat))) {
-    stop("xyz contains NAs!")
-  }
-  colnames(mat) <- xyz_c
-  mat <- mat[, colnames(mat) %in% which, drop = FALSE]
-  mat
+  unclass(cloud)[, which_cols, drop = FALSE]
 }

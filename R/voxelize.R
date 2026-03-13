@@ -2,15 +2,16 @@
 #'
 #' This is a simple round-to-multiple function which can be used to voxelize
 #' point clouds.
-#' 
-#' @param cloud The point cloud to voxelize as a matrix-like object.
+#'
+#' @param cloud A `pt_cld` object (see [as_pt_cld()]).
 #' @param res Numeric of the voxel resolution to apply on the point cloud.
 #' @export
-#' @return The voxelized point cloud as a matrix with columns "x", "y", "z".
+#' @return A `pt_cld` object with the voxelized point cloud.
 #' @examples
 #' sphere <- gen_sphere(1, 0.01)
 #' sphere_v <- voxelize(sphere, 0.05)
 voxelize <- function(cloud, res) {
+  .validate_pt_cld(cloud)
   out <- unique(.round_n(cloud, res))
-  out
+  pt_cld(out)
 }
