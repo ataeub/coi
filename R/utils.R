@@ -197,7 +197,7 @@
 # x <- c(1, 2, 3, 4, 5)
 # coi:::.gini(x)
 .gini <- function(x) {
-  x <- as.numeric(na.omit(x))
+  x <- as.numeric(stats::na.omit(x))
   n <- length(x)
   if (n <= 1) {
     return(NA_real_)

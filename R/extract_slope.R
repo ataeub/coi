@@ -15,11 +15,11 @@
 #' @export
 #' @examples
 #' # Create a tilted plane
-#' x <- 1:100
-#' y <- 1:100
+#' x <- 1:20
+#' y <- 1:20
 #' plane <- expand.grid(x = x, y = y)
 #' plane$z <- (-1 * plane$x - 2) / -1
-#' plane <- cloud_to_mat(plane)
+#' plane <- as_pt_cld(plane)
 #' plane_dtm <- extract_dtm(plane, 2)
 #' result <- extract_slope(plane_dtm, aspect = TRUE)
 #' round(result$slope)  # expected: 45

@@ -3,7 +3,7 @@
 #' Calculates ENL₀, ENL₁, ENL₂ as vertical structural complexity indices.
 #' Optionally plots the vertical voxel distribution.
 #'
-#' @param cloud Point cloud as a matrix-like object.
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param voxel_res Numeric voxel resolution for voxelization.
 #' @param layer_thickness Numeric thickness of each vertical layer (default 1).
 #' @param plot Logical, whether to plot the vertical voxel distribution (default FALSE).
@@ -16,7 +16,7 @@
 enl <- function(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title = NULL) {
   stopifnot(layer_thickness > 0)
   stopifnot(voxel_res > 0)
-  cloud <- cloud_to_mat(cloud)
+  .validate_pt_cld(cloud)
 
   # Voxelize the point cloud
   coords_vox <- voxelize(cloud, voxel_res)
@@ -28,8 +28,8 @@ enl <- function(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title =
   generate_sequence <- function(start, stop, step) {
     s <- seq(start, stop, by = step)
     # Ensure the last boundary is >= stop so all voxels are captured
-    if (tail(s, 1) < stop) {
-      s <- c(s, tail(s, 1) + step)
+    if (utils::tail(s, 1) < stop) {
+      s <- c(s, utils::tail(s, 1) + step)
     }
     s
   }
@@ -75,7 +75,7 @@ enl <- function(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title =
     stopifnot(is.character(plot_title))
     y_labels <- enl_seq[-1]
     df <- data.frame(height = y_labels, fraction = layer_fractions)
-    p <- ggplot2::ggplot(df, ggplot2::aes(x = fraction, y = height)) +
+    p <- ggplot2::ggplot(df, ggplot2::aes(x = .data$fraction, y = .data$height)) +
       ggplot2::geom_col(
         width = layer_thickness * 0.9,
         fill = "forestgreen",

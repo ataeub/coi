@@ -15,7 +15,7 @@
 #' to a smaller region before normalization using functions like `clip_rect()`.
 #' This minimizes reliance on the fallback method and improves interpolation accuracy.
 #'
-#' @param cloud (matrix or data.frame) Point cloud with columns "x", "y", "z".
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param res (numeric) Resolution parameter for DTM mesh extraction. Ignored if `dtm` is provided. Default: NULL
 #' @param dtm (mesh3d object) Pre-computed DTM mesh object. If provided, `res` and smoothing parameters are ignored. Default: NULL
 #' @param sm_type (character) Smoothing type; passed to `extract_dtm()`. Default: NULL
@@ -24,10 +24,11 @@
 #' @param sm_mu (numeric) Smoothing mu parameter; passed to `extract_dtm()`. Default: NULL
 #' @param sm_delta (numeric) Smoothing delta parameter; passed to `extract_dtm()`. Default: NULL
 #'
-#' @return (numeric) Vector of normalized Z coordinates for each point.
+#' @return A `pt_cld` object with normalized Z coordinates.
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' cloud <- gen_sphere(50, 1)
 #' cloud_dtm <- extract_dtm(cloud, 2)
 #' # We cut a small border of the cloud after the dtm extraction to prevent
@@ -41,6 +42,7 @@
 #' # We can see that the normalized cloud has been shifted along z so that the
 #' # lowest values are around 0. There will always be some points below 0 due to
 #' # inaccuracies between the dtm and the cloud.
+#' }
 z_normalize <- function(
   cloud,
   res = NULL,
@@ -51,7 +53,7 @@ z_normalize <- function(
   sm_mu = NULL,
   sm_delta = NULL
 ) {
-  cloud <- cloud_to_mat(cloud)
+  .validate_pt_cld(cloud)
 
   if (is.null(dtm)) {
     if (is.null(res)) {

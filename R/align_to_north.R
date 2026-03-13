@@ -10,8 +10,7 @@
 #' offset is applied ("north"/"n": 0°, "east"/"e": 360°, "south"/"s": 270°,
 #' "west"/"w": 180°). Rotation is always around the origin (0, 0, 0).
 #'
-#' @param cloud matrix-like. Point cloud with columns "x", "y", "z". Use
-#' `cloud_to_mat()` to get this format.
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param p2 numeric. Length-2 vector giving the target point defining the
 #' heading direction.
 #' @param p1 numeric. Length-2 vector giving the reference point
@@ -20,8 +19,7 @@
 #' "east"/"e", "south"/"s", "west"/"w") or a numeric degree offset to add to
 #' the computed alignment angle (default `"north"`).
 #'
-#' @return matrix with columns "x", "y", "z" containing the rotated point
-#' cloud.
+#' @return A `pt_cld` object with the rotated coordinates.
 #'
 #' @export
 #' @examples
@@ -31,6 +29,7 @@
 #' aligned <- align_to_north(cloud, p2, p1, heading = "north")
 #' aligned_custom <- align_to_north(cloud, p2, p1, heading = 45)
 align_to_north <- function(cloud, p2, p1 = c(0, 0), heading = "north") {
+  .validate_pt_cld(cloud)
   heading <- tolower(heading)
   heading_vector <- c(p2[1] - p1[1], p2[2] - p1[2])
   y_vector <- c(0 - p1[1], 1 - p1[2])
@@ -59,9 +58,6 @@ align_to_north <- function(cloud, p2, p1 = c(0, 0), heading = "north") {
     0, 0, 1
   ), nrow = 3, byrow = TRUE)
 
-  pc_xyz <- as.matrix(cloud[, c("x", "y", "z")])
-  pc_aligned <- t(rot_matrix %*% t(pc_xyz))
-  cloud[, c("x", "y", "z")] <- pc_aligned
-
-  cloud
+  pc_aligned <- t(rot_matrix %*% t(unclass(cloud)))
+  pt_cld(pc_aligned)
 }

@@ -9,13 +9,14 @@
 #' Points whose mean distance exceeds the global mean plus `s` standard
 #' deviations are classified as outliers and removed.
 #'
-#' @param cloud (matrix or data.frame) Point cloud with columns "x", "y", "z".
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param n (integer) Number of nearest neighbours to consider.
 #' @param s (numeric) Standard deviation multiplier for the distance threshold.
 #'   Must be >= 0. Lower values remove more aggressively.
 #'
-#' @return (matrix) Filtered point cloud with columns "x", "y", "z".
+#' @return A `pt_cld` object with outliers removed.
 #'
+#' @export
 #' @examples
 #' sphere <- gen_sphere(1, 0.05)
 #' # Add two outlier points far from the surface
@@ -28,7 +29,7 @@
 sor <- function(cloud, n, s) {
   stopifnot(rlang::is_integerish(n))
   stopifnot(s >= 0)
-  cloud <- cloud_to_mat(cloud)
+  .validate_pt_cld(cloud)
   old_opt <- getOption("lidR.progress")
   options(lidR.progress = FALSE)
   on.exit(options(lidR.progress = old_opt), add = TRUE)
@@ -38,10 +39,6 @@ sor <- function(cloud, n, s) {
     d <- matrix(d, ncol = 1)
   }
   mean_d <- rowMeans(d)
-  thr <- mean(mean_d) + s * sd(mean_d)
-  cloud <- cloud[mean_d <= thr, , drop = FALSE]
-  if (!all(colnames(cloud) %in% c("x", "y", "z"))) {
-    colnames(cloud) <- c("x", "y", "z")
-  }
-  cloud
+  thr <- mean(mean_d) + s * stats::sd(mean_d)
+  cloud[mean_d <= thr, , drop = FALSE]
 }

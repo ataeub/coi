@@ -11,12 +11,11 @@
 #' (below min_z + length). This is useful for removing canopy or ground points
 #' when focusing on a specific height range.
 #'
-#' @param cloud (matrix or data.frame) Point cloud with columns "x", "y", "z".
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param length (numeric) The length (in Z units) to remove from the cloud.
 #' @param from_top (logical) If TRUE, remove from top; if FALSE, remove from bottom. Default: FALSE
 #'
-#' @return (matrix or data.frame) The clipped point cloud with rows removed
-#'   according to the clipping direction, preserving the original data structure.
+#' @return A `pt_cld` object with the clipped point cloud.
 #'
 #' @export
 #' @examples
@@ -27,6 +26,7 @@
 #' clipped_top <- clip_z(cloud, 5, from_top = TRUE)
 #'
 clip_z <- function(cloud, length, from_top = FALSE) {
+  .validate_pt_cld(cloud)
   z <- cloud[, "z"]
   if (from_top) {
     mask <- z <= (max(z) - length)

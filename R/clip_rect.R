@@ -1,6 +1,6 @@
 #' Clip a point cloud to an axis-aligned rectangle
 #'
-#' @param cloud A numeric matrix with columns \code{"x"}, \code{"y"}, and \code{"z"}.
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param dim_x Numeric. Edge length along the x-axis.
 #' @param dim_y Numeric. Edge length along the y-axis. Defaults to \code{dim_x} (square).
 #' @param center Either a character string \code{"center"} (geometric center of the
@@ -8,8 +8,8 @@
 #'   numeric vector of length 2 giving explicit \code{c(x, y)} coordinates.
 #'   Partial matching is supported for character inputs.
 #'
-#' @return A numeric matrix of the same structure as \code{cloud}, containing only
-#'   points within the specified rectangle.
+#' @return A `pt_cld` object containing only points within the specified
+#'   rectangle.
 #'
 #' @export
 #' @examples
@@ -24,6 +24,7 @@ clip_rect <- function(
   dim_y = dim_x,
   center = c("center", "origin")
 ) {
+  .validate_pt_cld(cloud)
   if (is.character(center)) {
     center <- match.arg(center)
     center <- if (center == "center") {

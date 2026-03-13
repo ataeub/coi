@@ -5,8 +5,7 @@
 #' per cell is extracted. Statistics are computed for heights above a given
 #' threshold.
 #'
-#' @param cloud Point cloud as a matrix-like object with columns "x", "y", "z".
-#' Use `cloud_to_mat()` to get this format.
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param res Numeric of the grid resolution for rasterization.
 #' @param lower_cutoff Numeric of the minimum canopy height threshold. Heights
 #' below this value are excluded from statistics calculation.
@@ -20,11 +19,14 @@
 #' (the rasterized height matrix). If `plot = TRUE`, an additional "plot"
 #' element containing a ggplot object is included.
 #'
+#' @importFrom rlang .data
 #' @export
 #' @examples
+#' \dontrun{
 #' sphere <- gen_sphere(1, 0.01)
 #' stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
-#'
+#' }
+#' 
 canopy_stats <- function(
   cloud,
   res,
@@ -32,7 +34,7 @@ canopy_stats <- function(
   plot = TRUE,
   plot_title = NULL
 ) {
-  cloud <- cloud_to_mat(cloud)
+  .validate_pt_cld(cloud)
 
   if (!is.numeric(res) || res <= 0) {
     stop("res must be a positive numeric value.")
@@ -54,7 +56,7 @@ canopy_stats <- function(
   z <- cloud[, "z"]
 
   cells <- data.frame(x = x_vox, y = y_vox, z = z)
-  raster <- aggregate(z ~ x + y, data = cells, FUN = max)
+  raster <- stats::aggregate(z ~ x + y, data = cells, FUN = max)
 
   canopy_heights <- raster$z
   if (!is.null(lower_cutoff)) {
@@ -69,7 +71,7 @@ canopy_stats <- function(
     ))
   }
 
-  ch_sd <- if (length(canopy_heights) > 1) sd(canopy_heights) else NA_real_
+  ch_sd <- if (length(canopy_heights) > 1) stats::sd(canopy_heights) else NA_real_
   ch_mean <- mean(canopy_heights)
   stats <- list(
     max  = max(canopy_heights),
@@ -101,10 +103,10 @@ canopy_stats <- function(
     stopifnot(is.character(plot_title))
     plot_df <- raster
 
-    out$plot <- ggplot2::ggplot(plot_df, ggplot2::aes(x = x, y = y, fill = z)) +
+    out$plot <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data$x, y = .data$y, fill = .data$z)) +
       ggplot2::geom_raster() +
       ggplot2::scale_fill_gradientn(
-        colours = hcl.colors(100, "viridis"),
+        colours = grDevices::hcl.colors(100, "viridis"),
         name    = "Canopy Height (m)"
       ) +
       ggplot2::coord_equal() +

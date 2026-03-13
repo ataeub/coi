@@ -10,7 +10,7 @@
 #' creates a Delaunay triangulation mesh from these ground points. Optional smoothing
 #' can be applied to the resulting mesh using various smoothing algorithms.
 #'
-#' @param cloud (matrix or data.frame) Point cloud with columns "x", "y", "z".
+#' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param res (numeric) Grid cell resolution for DTM extraction. Determines the spacing
 #'   of ground points in the resulting mesh.
 #' @param sm_type (character) Smoothing algorithm type; passed to `Rvcg::vcgSmooth()`.
@@ -41,7 +41,7 @@ extract_dtm <- function(
   sm_mu = NULL,
   sm_delta = NULL
 ) {
-  cloud <- cloud_to_mat(cloud)
+  .validate_pt_cld(cloud)
 
   ix <- floor(cloud[, "x"] / res)
   iy <- floor(cloud[, "y"] / res)
@@ -58,6 +58,12 @@ extract_dtm <- function(
   cloud <- cbind(x = x, y = y, z = z)
 
   cloud_2d <- cloud[, 1:2]
+  if (!requireNamespace("geometry", quietly = TRUE)) {
+    stop("Package 'geometry' is required for extract_dtm(). Install it with install.packages('geometry').")
+  }
+  if (!requireNamespace("rgl", quietly = TRUE)) {
+    stop("Package 'rgl' is required for extract_dtm(). Install it with install.packages('rgl').")
+  }
   tri_2d <- geometry::delaunayn(cloud_2d)
   mesh <- rgl::tmesh3d(
     vertices = t(cloud),
