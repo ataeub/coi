@@ -5,8 +5,8 @@
 #' compute the coi with `coi()` or the interaction point cloud with distances as
 #' a fourth column.
 #'
-#' @param cloud_i First point cloud as a matrix-like object.
-#' @param cloud_j Second point cloud as a matrix-like object.
+#' @param cloud_i First point cloud as a `pt_cld` object (see [as_pt_cld()]).
+#' @param cloud_j Second point cloud as a `pt_cld` object (see [as_pt_cld()]).
 #' @param d_max Numeric of the maximum distance to consider for nearest neighbor
 #' search.
 #' @param returns Character, either "distances" (default) to return a vector of
@@ -26,6 +26,8 @@ extract_interaction <- function(
   d_max,
   returns = c("distances", "cloud")
 ) {
+  .validate_pt_cld(cloud_i, "cloud_i")
+  .validate_pt_cld(cloud_j, "cloud_j")
   returns <- match.arg(returns)
   nn_i <- .calculate_c2c_dist(cloud_i, cloud_j, d_max)
   nn_j <- .calculate_c2c_dist(cloud_j, cloud_i, d_max)

@@ -16,7 +16,8 @@ Encoding: UTF-8
 Imports: 
     RANN,
     concaveman,
-    grDevices
+    grDevices,
+    stats
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 
@@ -25,5 +26,7 @@ Suggests:
     viridis,
     scales,
     Rvcg,
-    ggplot2
+    ggplot2,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 VignetteBuilder: knitr

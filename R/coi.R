@@ -13,8 +13,10 @@
 #' computation or save them as seperate files. For this the low-level function
 #' `compute_coi()` is available.
 #'
-#' @param cloud_i First single tree point cloud as a matrix-like object.
-#' @param cloud_j Second single tree point cloud as a matrix-like object.
+#' @param cloud_i First single tree point cloud as a `pt_cld` object
+#'   (see [as_pt_cld()]).
+#' @param cloud_j Second single tree point cloud as a `pt_cld` object
+#'   (see [as_pt_cld()]).
 #' @param d_max Numeric of the maximum distance of interaction. Decides how far
 #' away points of one tree can be from the other before they are excluded from
 #' the interaction cloud.
@@ -31,8 +33,8 @@
 #' sphere2 <- gen_sphere(1, 0.01, c(0, 0.5, 0))
 #' coi(sphere1, sphere2, 0.3, 0.05)
 coi <- function(cloud_i, cloud_j, d_max, vox_res = NULL, warnings = TRUE) {
-  cloud_i <- cloud_to_mat(cloud_i)
-  cloud_j <- cloud_to_mat(cloud_j)
+  .validate_pt_cld(cloud_i, "cloud_i")
+  .validate_pt_cld(cloud_j, "cloud_j")
 
   if (!is.null(vox_res) && is.numeric(vox_res)) {
     cloud_i <- voxelize(cloud_i, vox_res)

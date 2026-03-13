@@ -2,12 +2,12 @@
 # respective nearest points of the reference cloud with a kd-tree using the
 # `RANN::nn2()` function.
 #
-# @param cloud_query The queried cloud as a matrix-like object, whose points
+# @param cloud_query The queried cloud as a pt_cld object, whose points
 # will be labelled with the distance to the nearest point of the reference
 # cloud.
-# @param cloud_ref The reference cloud as a matrix-like object, whose points
+# @param cloud_ref The reference cloud as a pt_cld object, whose points
 # the query cloud will be compared against.
-# @param cloud_ref The reference cloud as a matrix-like object, whose points
+# @param cloud_ref The reference cloud as a pt_cld object, whose points
 # the query cloud will be compared against.
 # @param max_dist Numeric of an optional maximum distance for the
 # calculation. Points above this threshold will be discarded.
@@ -23,6 +23,8 @@
   cloud_ref,
   max_dist = NULL
 ) {
+  .validate_pt_cld(cloud_query, "cloud_query")
+  .validate_pt_cld(cloud_ref, "cloud_ref")
   nn <- RANN::nn2(
     data = cloud_ref,
     query = cloud_query,
@@ -51,8 +53,8 @@
 # this by rounding only the z-coordinate of clouds to multiples of the strata
 # resolution.
 #
-# @param cloud Pointcloud as a 3 column matrix with column names "x", "y", "z".
-# Use cloud_to_mat() to get this format.
+# @param cloud Pointcloud as a pt_cld object.
+# Use as_pt_cld() to get this format.
 # @param strata_size Numeric of the resolution of vertical (z-axis) strata.
 # @returns The point cloud as a three column matrix with column names
 # "x", "y", "z", with z-axis binned to the given resolution.
@@ -60,6 +62,7 @@
 # sphere <- gen_sphere(1, 0.01)
 # coi:::.stratify(sphere, 0.05)
 .stratify <- function(cloud, strata_size) {
+  .validate_pt_cld(cloud)
   cloud_s <- cloud |>
     .round_n(strata_size) |>
     unique()
@@ -174,9 +177,11 @@
       "Less than 3 points were provided! Can only compute area for >3 points."
     )
   }
-  stopifnot()
   x <- points[, "x"]
   y <- points[, "y"]
-  area <- 0.5 * abs(sum(x[-1] * y[-length(y)] - x[-length(x)] * y[-1]))
+  n <- length(x)
+  # Shoelace: sum over all edges including the closing edge (n -> 1)
+  i_next <- c(2:n, 1)
+  area <- 0.5 * abs(sum(x * y[i_next] - x[i_next] * y))
   area
 }
