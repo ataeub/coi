@@ -177,6 +177,9 @@
   stopifnot()
   x <- points[, "x"]
   y <- points[, "y"]
-  area <- 0.5 * abs(sum(x[-1] * y[-length(y)] - x[-length(x)] * y[-1]))
+  n <- length(x)
+  # Shoelace: sum over all edges including the closing edge (n -> 1)
+  i_next <- c(2:n, 1)
+  area <- 0.5 * abs(sum(x * y[i_next] - x[i_next] * y))
   area
 }
