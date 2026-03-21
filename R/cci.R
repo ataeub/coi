@@ -1,7 +1,7 @@
 #' Compute the crown complementarity index (CCI) for two raw single tree point
 #' clouds.
 #'
-#' Calculate the CCI as described in Williams et al. 2017 in prep. All-in-one
+#' Calculate the CCI as described in Williams et al. (2017) All-in-one
 #' function handling voxelization, and calculation of CCI.
 #'
 #' Takes two raw point clouds representing interacting trees
