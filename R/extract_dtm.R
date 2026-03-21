@@ -71,14 +71,12 @@ extract_dtm <- function(
     homogeneous = FALSE
   )
   if (!is.null(sm_type)) {
-    mesh <- Rvcg::vcgSmooth(
-      mesh,
-      type = sm_type,
-      iteration = sm_i,
-      lambda = sm_lambda,
-      mu = sm_mu,
-      delta = sm_delta
-    )
+    sm_args <- list(mesh = mesh, type = sm_type)
+    if (!is.null(sm_i))      sm_args$iteration <- sm_i
+    if (!is.null(sm_lambda)) sm_args$lambda    <- sm_lambda
+    if (!is.null(sm_mu))     sm_args$mu        <- sm_mu
+    if (!is.null(sm_delta))  sm_args$delta     <- sm_delta
+    mesh <- do.call(Rvcg::vcgSmooth, sm_args)
   }
   mesh
 }
