@@ -40,7 +40,7 @@ is left undefined. Defaults to TRUE.}
 A numeric representing the CCI.
 }
 \description{
-Calculate the CCI as described in Williams et al. 2017 in prep. All-in-one
+Calculate the CCI as described in Williams et al. (2017) All-in-one
 function handling voxelization, and calculation of CCI.
 }
 \details{

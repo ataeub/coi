@@ -4,10 +4,10 @@
 \alias{save_to_laz}
 \title{Save cloud to a .laz file}
 \usage{
-save_to_laz(mat, file_path)
+save_to_laz(cloud, file_path)
 }
 \arguments{
-\item{mat}{A \code{pt_cld} object. Use \code{\link[=as_pt_cld]{as_pt_cld()}} to convert.}
+\item{cloud}{A \code{pt_cld} object. Use \code{\link[=as_pt_cld]{as_pt_cld()}} to convert.}
 
 \item{file_path}{Character string specifying the output file path.}
 }
