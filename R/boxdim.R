@@ -11,12 +11,22 @@
 #' cloud has been voxelized before independently.
 #' @param warnings Logical controlling whether to display a warning when vox_res
 #' is left undefined. Defaults to TRUE.
-#' @return A numeric representing the box dimension.
+#' @param plot Logical. If TRUE, a ggplot of the log-log regression is
+#' included in the output. Defaults to TRUE.
+#' @return If `plot = FALSE`, a numeric representing the box dimension.
+#' If `plot = TRUE`, a named list with elements `boxdim` (the box dimension)
+#' and `plot` (a ggplot object).
 #' @export
 #' @examples
 #' sphere <- gen_sphere(1, 0.01, c(0, 0, 0))
 #' boxdim(sphere, 0.1, 0.05)
-boxdim <- function(cloud, threshold, vox_res = NULL, warnings = TRUE) {
+boxdim <- function(
+  cloud,
+  threshold,
+  vox_res = NULL,
+  plot = TRUE,
+  warnings = TRUE
+) {
   .validate_pt_cld(cloud)
 
   if (!is.null(vox_res) && is.numeric(vox_res)) {
@@ -55,6 +65,29 @@ boxdim <- function(cloud, threshold, vox_res = NULL, warnings = TRUE) {
 
   slope <- coef[2]
 
-  boxdim <- slope
-  boxdim
+  if (plot) {
+    if (!requireNamespace("ggplot2", quietly = TRUE)) {
+      stop("Package 'ggplot2' is required for plotting. Install it with install.packages('ggplot2').")
+    }
+    df <- data.frame(x = x[, 2], y = y)
+    fit_df <- data.frame(
+      x = range(df$x),
+      y = coef[1] + coef[2] * range(df$x)
+    )
+    p <- ggplot2::ggplot(df, ggplot2::aes(x = .data$x, y = .data$y)) +
+      ggplot2::geom_point(size = 2) +
+      ggplot2::geom_line(data = fit_df, ggplot2::aes(
+        x = .data$x, y = .data$y
+      ), color = "steelblue", linewidth = 1) +
+      ggplot2::labs(
+        x = "log(1 / box size)",
+        y = "log(N boxes)",
+        title = "Box dimension log-log regression",
+        subtitle = sprintf("Slope (box dimension) = %.3f", slope)
+      ) +
+      ggplot2::theme_minimal()
+    return(list(boxdim = slope, plot = p))
+  }
+
+  slope
 }
