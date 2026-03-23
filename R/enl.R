@@ -13,17 +13,33 @@
 #' @examples
 #' sphere <- gen_sphere(1, 0.01)
 #' enl_stats <- enl(sphere, voxel_res = 0.05, layer_thickness = 1, plot = TRUE)
-enl <- function(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title = NULL) {
+enl <- function(
+  cloud,
+  voxel_res = NULL,
+  layer_thickness = 1,
+  plot = TRUE,
+  plot_title = NULL,
+  warnings = TRUE
+) {
   stopifnot(layer_thickness > 0)
   stopifnot(voxel_res > 0)
   .validate_pt_cld(cloud)
 
   # Voxelize the point cloud
-  coords_vox <- voxelize(cloud, voxel_res)
-  total_vox <- nrow(coords_vox)
+  if (!is.null(voxel_res)) {
+    cloud <- voxelize(cloud, voxel_res)
+  } else if (warnings) {
+    warning(
+      "vox_res left undefined. Will process the raw clouds without",
+      " voxelization. Only continue if you voxelized the clouds before",
+      " yourself, as ENL is only clearly defined for voxelized clouds. To",
+      " supress this warning set warnings = FALSE."
+    )
+  }
+  total_vox <- nrow(cloud)
 
-  min_z <- min(coords_vox[, 3])
-  max_z <- max(coords_vox[, 3])
+  min_z <- min(cloud[, 3])
+  max_z <- max(cloud[, 3])
 
   generate_sequence <- function(start, stop, step) {
     s <- seq(start, stop, by = step)
@@ -46,11 +62,11 @@ enl <- function(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title =
     lower <- enl_seq[idx]
     upper <- enl_seq[idx + 1]
     if (idx == 1) {
-      z_filter <- coords_vox[, 3] >= lower & coords_vox[, 3] <= upper
+      z_filter <- cloud[, 3] >= lower & cloud[, 3] <= upper
     } else {
-      z_filter <- coords_vox[, 3] > lower & coords_vox[, 3] <= upper
+      z_filter <- cloud[, 3] > lower & cloud[, 3] <= upper
     }
-    layer <- coords_vox[z_filter, , drop = FALSE]
+    layer <- cloud[z_filter, , drop = FALSE]
     filled_vox_ratio <- nrow(layer) / total_vox
     layer_fractions[idx] <- filled_vox_ratio
     if (filled_vox_ratio > 0) {
