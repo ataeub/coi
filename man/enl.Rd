@@ -4,7 +4,14 @@
 \alias{enl}
 \title{Compute the Effective Number of Layers (ENL) for a voxelized point cloud.}
 \usage{
-enl(cloud, voxel_res, layer_thickness = 1, plot = TRUE, plot_title = NULL)
+enl(
+  cloud,
+  voxel_res = NULL,
+  layer_thickness = 1,
+  plot = TRUE,
+  plot_title = NULL,
+  warnings = TRUE
+)
 }
 \arguments{
 \item{cloud}{A \code{pt_cld} object. Use \code{\link[=as_pt_cld]{as_pt_cld()}} to convert.}

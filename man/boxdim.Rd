@@ -5,7 +5,7 @@
 \title{Compute the box dimension structural complexity index for a given point
 cloud.}
 \usage{
-boxdim(cloud, threshold, vox_res = NULL, warnings = TRUE)
+boxdim(cloud, threshold, vox_res = NULL, plot = TRUE, warnings = TRUE)
 }
 \arguments{
 \item{cloud}{A \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
@@ -17,11 +17,16 @@ algorithm iterates}
 (default), the raw cloud will be analzed, which should only be done if the
 cloud has been voxelized before independently.}
 
+\item{plot}{Logical. If TRUE, a ggplot of the log-log regression is
+included in the output. Defaults to TRUE.}
+
 \item{warnings}{Logical controlling whether to display a warning when vox_res
 is left undefined. Defaults to TRUE.}
 }
 \value{
-A numeric representing the box dimension.
+If \code{plot = FALSE}, a numeric representing the box dimension.
+If \code{plot = TRUE}, a named list with elements \code{boxdim} (the box dimension)
+and \code{plot} (a ggplot object).
 }
 \description{
 Calculate the box dimension as described in Seidel et al. (2018)
