@@ -15,11 +15,14 @@
 #' `plot = TRUE`. Defaults to "Canopy Height Raster".
 #'
 #' @return A list with elements "max", "mean", "sd", "cv" (coefficient of
-#' variation), "gini" (Gini coefficient) of canopy heights, and "grid"
-#' (the rasterized height matrix). If `plot = TRUE`, an additional "plot"
-#' element containing a ggplot object is included.
+#' variation), "gini" (Gini coefficient), "openness" (proportion of NA cells
+#' in the raster grid as a value between 0 and 1), and "grid" (the
+#' rasterized height matrix). If `plot = TRUE`, an additional "plot" element
+#' containing a ggplot object is included. The plot legend title displays the
+#' canopy statistics using HTML-formatted text via `ggtext`.
 #'
 #' @importFrom rlang .data
+#' @importFrom ggtext element_markdown
 #' @export
 #' @examples
 #' \dontrun{
@@ -91,11 +94,15 @@ canopy_stats <- function(
   for (i in seq_len(nrow(raster))) {
     grid[as.character(raster$y[i]), as.character(raster$x[i])] <- raster$z[i]
   }
+  out$openness <- sum(is.na(grid)) / length(grid)
   out$grid <- grid
 
   if (plot) {
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
       stop("Package 'ggplot2' is required for plotting. Install it with install.packages('ggplot2').")
+    }
+    if (!requireNamespace("ggtext", quietly = TRUE)) {
+      stop("Package 'ggtext' is required for plotting. Install it with install.packages('ggtext').")
     }
     if (is.null(plot_title)) {
       plot_title <- "Canopy Height Raster"
@@ -103,15 +110,26 @@ canopy_stats <- function(
     stopifnot(is.character(plot_title))
     plot_df <- raster
 
+    stat_label <- paste0(
+      "<b>Max:</b> ",      round(out$max, 2), "<br>",
+      "<b>Mean:</b> ",     round(out$mean, 2), "<br>",
+      "<b>SD:</b> ",       round(out$sd, 2), "<br>",
+      "<b>CV:</b> ",       round(out$cv, 2), "<br>",
+      "<b>Gini:</b> ",     round(out$gini, 2), "<br>",
+      "<b>Openness:</b> ", round(out$openness * 100, 1), "%<br><br>",
+      "<span style='font-size:12pt'><b>Canopy Height (m)</b></span>"
+    )
+
     out$plot <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data$x, y = .data$y, fill = .data$z)) +
       ggplot2::geom_tile() +
       ggplot2::scale_fill_gradientn(
         colours = grDevices::hcl.colors(100, "viridis"),
-        name    = "Canopy Height (m)"
+        name    = stat_label
       ) +
       ggplot2::coord_equal() +
       ggplot2::labs(title = plot_title, x = "X", y = "Y") +
-      ggplot2::theme_minimal()
+      ggplot2::theme_minimal() +
+      ggplot2::theme(legend.title = ggtext::element_markdown(size = 11, lineheight = 1.5))
   }
   out
 }

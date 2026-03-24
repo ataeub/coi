@@ -25,6 +25,7 @@ RoxygenNote: 7.3.3
 Suggests: 
     geometry,
     ggplot2,
+    ggtext,
     knitr,
     rgl,
     rlas,
