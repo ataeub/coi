@@ -14,6 +14,8 @@ BugReports: https://github.com/ataeub/coi/issues
 License: AGPL (>= 3)
 Encoding: UTF-8
 Imports: 
+    ggplot2,
+    ggtext,
     RANN,
     concaveman,
     grDevices,
@@ -24,8 +26,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 
     geometry,
-    ggplot2,
-    ggtext,
     knitr,
     rgl,
     rlas,

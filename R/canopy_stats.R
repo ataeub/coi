@@ -98,12 +98,6 @@ canopy_stats <- function(
   out$grid <- grid
 
   if (plot) {
-    if (!requireNamespace("ggplot2", quietly = TRUE)) {
-      stop("Package 'ggplot2' is required for plotting. Install it with install.packages('ggplot2').")
-    }
-    if (!requireNamespace("ggtext", quietly = TRUE)) {
-      stop("Package 'ggtext' is required for plotting. Install it with install.packages('ggtext').")
-    }
     if (is.null(plot_title)) {
       plot_title <- "Canopy Height Raster"
     }
