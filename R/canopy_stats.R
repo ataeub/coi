@@ -26,7 +26,7 @@
 #' sphere <- gen_sphere(1, 0.01)
 #' stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
 #' }
-#' 
+#'
 canopy_stats <- function(
   cloud,
   res,
@@ -104,7 +104,7 @@ canopy_stats <- function(
     plot_df <- raster
 
     out$plot <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data$x, y = .data$y, fill = .data$z)) +
-      ggplot2::geom_raster() +
+      ggplot2::geom_tile() +
       ggplot2::scale_fill_gradientn(
         colours = grDevices::hcl.colors(100, "viridis"),
         name    = "Canopy Height (m)"
