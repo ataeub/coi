@@ -25,6 +25,7 @@ boxdim <- function(
   threshold,
   vox_res = NULL,
   plot = TRUE,
+  plot_title = NULL,
   warnings = TRUE
 ) {
   .validate_pt_cld(cloud)
@@ -69,6 +70,9 @@ boxdim <- function(
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
       stop("Package 'ggplot2' is required for plotting. Install it with install.packages('ggplot2').")
     }
+    if (is.null(plot_title)) {
+      plot_title <- "Box dimension log-log regression"
+    }
     df <- data.frame(x = x[, 2], y = y)
     fit_df <- data.frame(
       x = range(df$x),
@@ -82,12 +86,11 @@ boxdim <- function(
       ggplot2::labs(
         x = "log(1 / box size)",
         y = "log(N boxes)",
-        title = "Box dimension log-log regression",
+        title = plot_title,
         subtitle = sprintf("Slope (box dimension) = %.3f", slope)
       ) +
       ggplot2::theme_minimal()
     return(list(boxdim = slope, plot = p))
   }
-
   slope
 }
