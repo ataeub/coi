@@ -63,9 +63,9 @@
 # coi:::.stratify(sphere, 0.05)
 .stratify <- function(cloud, strata_size) {
   .validate_pt_cld(cloud)
-  cloud_s <- cloud |>
-    .round_n(strata_size) |>
-    unique()
+  cloud_s <- cloud
+  cloud_s[, "z"] <- .round_n(cloud_s[, "z"], strata_size)
+  cloud_s <- unique(cloud_s)
   idx <- split(seq_len(nrow(cloud_s)), cloud_s[, "z"])
   strata <- lapply(idx, function(i) cloud_s[i, , drop = FALSE])
   strata
