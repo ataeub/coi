@@ -49,6 +49,7 @@ compute_coi <- function(distances, size_weight, d_max) {
       "carefully."
     )
   }
-  coi_value <- round(sum(1 / (1 + (distances / d_max))), 2) / size_weight
+
+  coi_value <- sum(1 - (distances / d_max)) / size_weight
   coi_value
 }
