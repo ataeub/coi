@@ -22,9 +22,11 @@ grid. Defaults to TRUE.}
 }
 \value{
 A list with elements "max", "mean", "sd", "cv" (coefficient of
-variation), "gini" (Gini coefficient) of canopy heights, and "grid"
-(the rasterized height matrix). If \code{plot = TRUE}, an additional "plot"
-element containing a ggplot object is included.
+variation), "gini" (Gini coefficient), "openness" (proportion of NA cells
+in the raster grid as a value between 0 and 1), and "grid" (the
+rasterized height matrix). If \code{plot = TRUE}, an additional "plot" element
+containing a ggplot object is included. The plot legend title displays the
+canopy statistics using HTML-formatted text via \code{ggtext}.
 }
 \description{
 Calculate various canopy height statistics from a point cloud rasterized

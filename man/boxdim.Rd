@@ -5,7 +5,14 @@
 \title{Compute the box dimension structural complexity index for a given point
 cloud.}
 \usage{
-boxdim(cloud, threshold, vox_res = NULL, plot = TRUE, warnings = TRUE)
+boxdim(
+  cloud,
+  threshold,
+  vox_res = NULL,
+  plot = TRUE,
+  plot_title = NULL,
+  warnings = TRUE
+)
 }
 \arguments{
 \item{cloud}{A \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
