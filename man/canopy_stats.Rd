@@ -4,7 +4,7 @@
 \alias{canopy_stats}
 \title{Compute canopy height statistics from a point cloud.}
 \usage{
-canopy_stats(cloud, res, lower_cutoff = NULL, plot = TRUE, plot_title = NULL)
+canopy_stats(cloud, res, lower_cutoff = NULL, plot = FALSE, plot_title = NULL)
 }
 \arguments{
 \item{cloud}{A \code{pt_cld} object. Use \code{\link[=as_pt_cld]{as_pt_cld()}} to convert.}
@@ -15,7 +15,7 @@ canopy_stats(cloud, res, lower_cutoff = NULL, plot = TRUE, plot_title = NULL)
 below this value are excluded from statistics calculation.}
 
 \item{plot}{Logical controlling whether to plot the rasterized canopy height
-grid. Defaults to TRUE.}
+grid. Defaults to FALSE.}
 
 \item{plot_title}{Character string for the plot title. Only used when
 \code{plot = TRUE}. Defaults to "Canopy Height Raster".}

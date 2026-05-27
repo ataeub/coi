@@ -8,7 +8,7 @@ enl(
   cloud,
   voxel_res = NULL,
   layer_thickness = 1,
-  plot = TRUE,
+  plot = FALSE,
   plot_title = NULL,
   warnings = TRUE
 )
@@ -20,7 +20,7 @@ enl(
 
 \item{layer_thickness}{Numeric thickness of each vertical layer (default 1).}
 
-\item{plot}{Logical, whether to plot the vertical voxel distribution (default TRUE).}
+\item{plot}{Logical, whether to plot the vertical voxel distribution (default FALSE).}
 
 \item{plot_title}{Optional character string for the plot title.}
 
