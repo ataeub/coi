@@ -12,8 +12,9 @@
 #' @param warnings Logical controlling whether to display a warning when vox_res
 #' is left undefined. Defaults to TRUE.
 #' @param plot Logical. If TRUE, a ggplot of the log-log regression is
-#' included in the output. Defaults to TRUE.
-#' @return If `plot = FALSE`, a numeric representing the box dimension.
+#' included in the output. Defaults to FALSE.
+#' @param plot_title Optional character string for the plot title.
+#' @return If `plot = FALSE` (default), a numeric representing the box dimension.
 #' If `plot = TRUE`, a named list with elements `boxdim` (the box dimension)
 #' and `plot` (a ggplot object).
 #' @export
@@ -24,7 +25,7 @@ boxdim <- function(
   cloud,
   threshold,
   vox_res = NULL,
-  plot = TRUE,
+  plot = FALSE,
   plot_title = NULL,
   warnings = TRUE
 ) {

@@ -9,7 +9,7 @@ boxdim(
   cloud,
   threshold,
   vox_res = NULL,
-  plot = TRUE,
+  plot = FALSE,
   plot_title = NULL,
   warnings = TRUE
 )
@@ -25,13 +25,15 @@ algorithm iterates}
 cloud has been voxelized before independently.}
 
 \item{plot}{Logical. If TRUE, a ggplot of the log-log regression is
-included in the output. Defaults to TRUE.}
+included in the output. Defaults to FALSE.}
+
+\item{plot_title}{Optional character string for the plot title.}
 
 \item{warnings}{Logical controlling whether to display a warning when vox_res
 is left undefined. Defaults to TRUE.}
 }
 \value{
-If \code{plot = FALSE}, a numeric representing the box dimension.
+If \code{plot = FALSE} (default), a numeric representing the box dimension.
 If \code{plot = TRUE}, a named list with elements \code{boxdim} (the box dimension)
 and \code{plot} (a ggplot object).
 }

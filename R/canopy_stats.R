@@ -10,7 +10,7 @@
 #' @param lower_cutoff Numeric of the minimum canopy height threshold. Heights
 #' below this value are excluded from statistics calculation.
 #' @param plot Logical controlling whether to plot the rasterized canopy height
-#' grid. Defaults to TRUE.
+#' grid. Defaults to FALSE.
 #' @param plot_title Character string for the plot title. Only used when
 #' `plot = TRUE`. Defaults to "Canopy Height Raster".
 #'
@@ -34,7 +34,7 @@ canopy_stats <- function(
   cloud,
   res,
   lower_cutoff = NULL,
-  plot = TRUE,
+  plot = FALSE,
   plot_title = NULL
 ) {
   .validate_pt_cld(cloud)

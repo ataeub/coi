@@ -20,9 +20,12 @@ enl(
 
 \item{layer_thickness}{Numeric thickness of each vertical layer (default 1).}
 
-\item{plot}{Logical, whether to plot the vertical voxel distribution (default FALSE).}
+\item{plot}{Logical, whether to plot the vertical voxel distribution (default TRUE).}
 
 \item{plot_title}{Optional character string for the plot title.}
+
+\item{warnings}{Logical controlling whether to display a warning when
+voxelization is skipped. Defaults to TRUE.}
 }
 \value{
 If plot=FALSE, returns a list (ENL0, ENL1, ENL2). If plot=TRUE, returns list plus ggplot object.

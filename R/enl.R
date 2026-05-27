@@ -8,6 +8,8 @@
 #' @param layer_thickness Numeric thickness of each vertical layer (default 1).
 #' @param plot Logical, whether to plot the vertical voxel distribution (default FALSE).
 #' @param plot_title Optional character string for the plot title.
+#' @param warnings Logical controlling whether to display a warning when
+#' voxelization is skipped. Defaults to TRUE.
 #' @return If plot=FALSE, returns a list (ENL0, ENL1, ENL2). If plot=TRUE, returns list plus ggplot object.
 #' @export
 #' @examples
@@ -17,7 +19,7 @@ enl <- function(
   cloud,
   voxel_res = NULL,
   layer_thickness = 1,
-  plot = TRUE,
+  plot = FALSE,
   plot_title = NULL,
   warnings = TRUE
 ) {
