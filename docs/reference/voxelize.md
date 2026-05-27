@@ -13,7 +13,8 @@ voxelize(cloud, res)
 
 - cloud:
 
-  The point cloud to voxelize as a matrix-like object.
+  A `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - res:
 
@@ -21,7 +22,7 @@ voxelize(cloud, res)
 
 ## Value
 
-The voxelized point cloud as a matrix with columns "x", "y", "z".
+A `pt_cld` object with the voxelized point cloud.
 
 ## Examples
 

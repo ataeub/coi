@@ -53,5 +53,5 @@ size_total <- sum(sphere1_v_size, sphere2_v_size)
 d_max <- 0.3
 i_dists <- extract_interaction(sphere1_v, sphere2_v, d_max)
 compute_coi(i_dists, size_total, d_max)
-#> [1] 0.8310432
+#> [1] 0.7794753
 ```

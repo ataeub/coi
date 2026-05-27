@@ -1,7 +1,7 @@
 # Compute the crown complementarity index (CCI) for two raw single tree point clouds.
 
-Calculate the CCI as described in Williams et al. 2017 in prep.
-All-in-one function handling voxelization, and calculation of CCI.
+Calculate the CCI as described in Williams et al. (2017) All-in-one
+function handling voxelization, and calculation of CCI.
 
 ## Usage
 
@@ -12,7 +12,7 @@ cci(
   strata_size,
   hull_type = c("concave", "convex"),
   vox_res = NULL,
-  warnings
+  warnings = TRUE
 )
 ```
 
@@ -20,11 +20,13 @@ cci(
 
 - cloud_i:
 
-  First single tree point cloud as a matrix-like object.
+  First single tree point cloud as a `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - cloud_j:
 
-  Second single tree point cloud as a matrix-like object.
+  Second single tree point cloud as a `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - strata_size:
 
@@ -63,5 +65,5 @@ them to a given common point density. Then CCI is computed.
 sphere1 <- gen_sphere(1, 0.01, c(0, 0, 0))
 sphere2 <- gen_sphere(1, 0.01, c(0, 0.5, 0))
 cci(sphere1, sphere2, 0.3, "concave", 0.05)
-#> [1] 0.04197531
+#> [1] 3.901223e-17
 ```

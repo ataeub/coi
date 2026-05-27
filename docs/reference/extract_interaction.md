@@ -16,11 +16,13 @@ extract_interaction(cloud_i, cloud_j, d_max, returns = c("distances", "cloud"))
 
 - cloud_i:
 
-  First point cloud as a matrix-like object.
+  First point cloud as a `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - cloud_j:
 
-  Second point cloud as a matrix-like object.
+  Second point cloud as a `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - d_max:
 

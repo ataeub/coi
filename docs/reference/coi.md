@@ -14,11 +14,13 @@ coi(cloud_i, cloud_j, d_max, vox_res = NULL, warnings = TRUE)
 
 - cloud_i:
 
-  First single tree point cloud as a matrix-like object.
+  First single tree point cloud as a `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - cloud_j:
 
-  Second single tree point cloud as a matrix-like object.
+  Second single tree point cloud as a `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - d_max:
 
@@ -60,5 +62,5 @@ is available.
 sphere1 <- gen_sphere(1, 0.01, c(0, 0, 0))
 sphere2 <- gen_sphere(1, 0.01, c(0, 0.5, 0))
 coi(sphere1, sphere2, 0.3, 0.05)
-#> [1] 0.8310432
+#> [1] 0.7794753
 ```
