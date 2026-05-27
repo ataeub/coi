@@ -9,13 +9,17 @@
 Source:
 [`inst/CITATION`](https://github.com/ataeub/coi/blob/master/inst/CITATION)
 
-Täuber A (2026). “coi: A R-library to extract tree crown interaction
-metrics.” This package has been developed for the paper Täuber et al.
-(2026) in prep.
+Täuber A, Fichtner A, Bruelheide H, Davrinche A, Haider S, Käcks T, Liu
+X, Ray T, von Oheimb G (2026). “Tree-Tree Interactions Revisited - A
+Novel Approach to Quantify Spatial Complementarity in Tree Crowns.”
+[doi:10.2139/ssrn.6366401](https://doi.org/10.2139/ssrn.6366401).
+<https://doi.org/10.2139/ssrn.6366401>.
 
-    @Unpublished{,
-      title = {coi: A R-library to extract tree crown interaction metrics.},
-      author = {Alexander Täuber},
+    @Misc{,
+      title = {Tree-Tree Interactions Revisited - A Novel Approach to Quantify Spatial Complementarity in Tree Crowns},
+      author = {Alexander Täuber and Andreas Fichtner and Helge Bruelheide and Andréa Davrinche and Sylvia Haider and Tobias Käcks and Xiaojuan Liu and Tama Ray and Goddert {von Oheimb}},
       year = {2026},
-      note = {This package has been developed for the paper Täuber et al. (2026) in prep.},
+      publisher = {SSRN},
+      doi = {10.2139/ssrn.6366401},
+      url = {https://doi.org/10.2139/ssrn.6366401},
     }
