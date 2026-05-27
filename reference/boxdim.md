@@ -5,14 +5,22 @@ Calculate the box dimension as described in Seidel et al. (2018)
 ## Usage
 
 ``` r
-boxdim(cloud, threshold, vox_res = NULL, warnings = TRUE)
+boxdim(
+  cloud,
+  threshold,
+  vox_res = NULL,
+  plot = FALSE,
+  plot_title = NULL,
+  warnings = TRUE
+)
 ```
 
 ## Arguments
 
 - cloud:
 
-  Point cloud as a matrix-like object.
+  A `pt_cld` object (see
+  [`as_pt_cld()`](https://ataeub.github.io/coi/reference/as_pt_cld.md)).
 
 - threshold:
 
@@ -25,6 +33,15 @@ boxdim(cloud, threshold, vox_res = NULL, warnings = TRUE)
   (default), the raw cloud will be analzed, which should only be done if
   the cloud has been voxelized before independently.
 
+- plot:
+
+  Logical. If TRUE, a ggplot of the log-log regression is included in
+  the output. Defaults to FALSE.
+
+- plot_title:
+
+  Optional character string for the plot title.
+
 - warnings:
 
   Logical controlling whether to display a warning when vox_res is left
@@ -32,7 +49,9 @@ boxdim(cloud, threshold, vox_res = NULL, warnings = TRUE)
 
 ## Value
 
-A numeric representing the box dimension.
+If `plot = FALSE` (default), a numeric representing the box dimension.
+If `plot = TRUE`, a named list with elements `boxdim` (the box
+dimension) and `plot` (a ggplot object).
 
 ## Examples
 

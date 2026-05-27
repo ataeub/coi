@@ -5,8 +5,8 @@
 The `coi` package is a small tool to calculate some metrics from
 terrestrial laser scanning (TLS) point clouds. The name `coi` stands for
 “crown overlap index” and is one of the metrics that can be extracted
-with the package. The COI is calculated as described in Täuber et
-al. (in prep.)
+with the package. The COI is calculated as described in [Täuber et
+al. (in prep.)](https://dx.doi.org/10.2139/ssrn.6366401)
 
 It was inspired by an earlier index called crown complementarity index
 (CCI), which was presented by [Williams et
@@ -16,6 +16,34 @@ be calculated by the `coi` package.
 Finally the package can also extract the box dimension, a structural
 complexity metric as described in [Seidel
 (2018)](https://doi.org/10.1002/ece3.3661).
+
+## The `pt_cld` class
+
+All point cloud operations in `coi` use the `pt_cld` class — a
+lightweight S3 wrapper around a 3-column numeric matrix with columns
+`x`, `y`, `z`. You can create one from a data.frame, matrix, or
+individual vectors:
+
+``` r
+
+library(coi)
+
+# From a data.frame (e.g. as returned by rlas::read.las())
+df <- data.frame(x = runif(100), y = runif(100), z = runif(100))
+cloud <- as_pt_cld(df)
+cloud
+#> pt_cld with 100 points
+#>   x: [0.007, 0.997]
+#>   y: [0.004, 1]
+#>   z: [0.017, 0.984]
+
+# Access coordinates
+head(cloud$x)
+#> [1] 0.080750138 0.834333037 0.600760886 0.157208442 0.007399441 0.466393497
+```
+
+All package functions require `pt_cld` objects as input and will produce
+clear errors if you pass a plain matrix or data.frame instead.
 
 ## COI calculation
 
@@ -31,7 +59,7 @@ spheres with a radius of `1 m` a voxel resolution of `0.01 m` and
 centers with a `0.5 m` distance on the x-axis.
 
 ``` r
-library(coi)
+
 library(ggplot2)
 
 sphere1 <- gen_sphere(
@@ -55,6 +83,7 @@ cloud.
 We can now take a look at our two voxelised spheres.
 
 ``` r
+
 sphere1_v <- voxelize(
   cloud = sphere1,
   res = 0.05
@@ -67,14 +96,14 @@ sphere2_v <- voxelize(
 spheres <- ggplot() +
   theme_void() +
   geom_point(
-    data = sphere1_v,
+    data = as.data.frame(sphere1_v),
     aes(x, y),
     size = 3,
     color = "black",
     alpha = 0.03
   ) +
   geom_point(
-    data = sphere2_v,
+    data = as.data.frame(sphere2_v),
     aes(x, y),
     size = 3,
     color = "red",
@@ -94,6 +123,7 @@ The `returns = "cloud"` argument ensures that the value of the function
 is a point cloud which we can use for plotting.
 
 ``` r
+
 d_max <- 0.1
 
 interaction_cloud <- extract_interaction(
@@ -105,7 +135,7 @@ interaction_cloud <- extract_interaction(
 
 spheres +
   geom_point(
-    data = interaction_cloud,
+    data = as.data.frame(interaction_cloud),
     aes(x, y),
     size = 3,
     color = "green",
@@ -124,6 +154,7 @@ just a 1-D vector of the individual points’ distances. For this we
 re-run `extract_interaction` with `returns = "distances"`.
 
 ``` r
+
 interaction_distances <- extract_interaction(
   cloud_i = sphere1_v,
   cloud_j = sphere2_v,
@@ -138,7 +169,7 @@ compute_coi(
   size_weight = total_size,
   d_max = d_max
 )
-#> [1] 0.5470105
+#> [1] 0.5111444
 ```
 
 ### All-in-one COI calculation using `coi()`
@@ -150,13 +181,14 @@ found suitable values you can skip all this and use the simple `coi`
 function to do all this in one step.
 
 ``` r
+
 coi(
   cloud_i = sphere1,
   cloud_j = sphere2,
   d_max = d_max,
   vox_res = 0.05
 )
-#> [1] 0.5470105
+#> [1] 0.5111444
 ```
 
 ## CCI calculation
@@ -168,6 +200,7 @@ interacting clouds. In a both spheres will have a radius of `2 m`. In b
 one will have a r of `2 m` and the other `3 m`.
 
 ``` r
+
 sphere1_a <- gen_sphere(
   r = 2,
   res = 0.05,
@@ -201,6 +234,7 @@ the two clouds are exactly homogenous in each vertical layer, while b
 has a much higher cci.
 
 ``` r
+
 cci(
   cloud_i = sphere1_a,
   cloud_j = sphere2_a,
@@ -216,7 +250,7 @@ cci(
   hull_type = "convex",
   vox_res = 0.1
 )
-#> [1] 0.5449223
+#> [1] 0.5347726
 ```
 
 ## Box dimension calculation
@@ -229,6 +263,7 @@ shapes with more points. The real magic of the parameter only shines in
 natural and fractal shapes like trees.
 
 ``` r
+
 sphere_a <- gen_sphere(
   r = 0.5,
   res = 0.05
