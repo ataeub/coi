@@ -22,6 +22,8 @@
   point cloud vertically
 - [`cloud_to_mat()`](https://ataeub.github.io/coi/reference/cloud_to_mat.md)
   : Convert tabular data to a point cloud matrix
+- [`co_2d()`](https://ataeub.github.io/coi/reference/co_2d.md) : Compute
+  a projected 2D crown overlap index for two point clouds.
 - [`coi()`](https://ataeub.github.io/coi/reference/coi.md) : Compute the
   crown overlap index (COI) for two raw single tree point clouds.
 - [`compute_coi()`](https://ataeub.github.io/coi/reference/compute_coi.md)
