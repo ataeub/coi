@@ -1,6 +1,6 @@
 Package: coi
 Title: Extract Tree-Tree Interaction Metrics from TLS Point Clouds
-Version: 2.0.0
+Version: 2.1.0
 Authors@R:
     person("Alexander", "Täuber", , "alexander.taeuber@idiv.de", role = c("aut", "cre", "cph"))
 Description: 

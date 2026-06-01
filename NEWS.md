@@ -1,5 +1,9 @@
 # coi (development version)
 
+## Changes in version 2.1.0
+
+- Added `co_2d()` to extract relative 2D crown overlap (very similar to `coi()` just in 2D and without point distance weighting)
+
 ## Changes in version 2.0.0
 
 ### New functionality
