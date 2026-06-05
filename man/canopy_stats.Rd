@@ -4,7 +4,15 @@
 \alias{canopy_stats}
 \title{Compute canopy height statistics from a point cloud.}
 \usage{
-canopy_stats(cloud, res, lower_cutoff = NULL, plot = FALSE, plot_title = NULL)
+canopy_stats(
+  cloud,
+  res,
+  lower_cutoff = NULL,
+  plot = FALSE,
+  plot_title = NULL,
+  footprint = NULL,
+  radius = NULL
+)
 }
 \arguments{
 \item{cloud}{A \code{pt_cld} object. Use \code{\link[=as_pt_cld]{as_pt_cld()}} to convert.}
@@ -19,11 +27,22 @@ grid. Defaults to FALSE.}
 
 \item{plot_title}{Character string for the plot title. Only used when
 \code{plot = TRUE}. Defaults to "Canopy Height Raster".}
+
+\item{footprint}{Optional character string describing the footprint geometry
+used for the openness calculation. Allowed values are \code{"rect"} and
+\code{"circ"}. \code{"rect"} uses the full raster extent. \code{"circ"} limits
+openness to cells inside a circle centered on the raster extent. If
+\code{NULL} (default), \code{"rect"} is used unless \code{radius} is supplied, in
+which case \code{"circ"} is assumed.}
+
+\item{radius}{Optional numeric radius for a circular footprint. When
+\code{NULL} and \code{footprint = "circ"}, the radius is inferred from the
+rasterized canopy extent.}
 }
 \value{
 A list with elements "max", "mean", "sd", "cv" (coefficient of
-variation), "gini" (Gini coefficient), "openness" (proportion of NA cells
-in the raster grid as a value between 0 and 1), and "grid" (the
+variation), "gini" (Gini coefficient), "openness" (proportion of empty
+cells inside the selected footprint as a value between 0 and 1), and "grid" (the
 rasterized height matrix). If \code{plot = TRUE}, an additional "plot" element
 containing a ggplot object is included. The plot legend title displays the
 canopy statistics using HTML-formatted text via \code{ggtext}.
@@ -38,6 +57,7 @@ threshold.
 \dontrun{
 sphere <- gen_sphere(1, 0.01)
 stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
+circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ")
 }
 
 }

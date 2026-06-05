@@ -13,10 +13,19 @@
 #' grid. Defaults to FALSE.
 #' @param plot_title Character string for the plot title. Only used when
 #' `plot = TRUE`. Defaults to "Canopy Height Raster".
+#' @param footprint Optional character string describing the footprint geometry
+#' used for the openness calculation. Allowed values are `"rect"` and
+#' `"circ"`. `"rect"` uses the full raster extent. `"circ"` limits
+#' openness to cells inside a circle centered on the raster extent. If
+#' `NULL` (default), `"rect"` is used unless `radius` is supplied, in
+#' which case `"circ"` is assumed.
+#' @param radius Optional numeric radius for a circular footprint. When
+#' `NULL` and `footprint = "circ"`, the radius is inferred from the
+#' rasterized canopy extent.
 #'
 #' @return A list with elements "max", "mean", "sd", "cv" (coefficient of
-#' variation), "gini" (Gini coefficient), "openness" (proportion of NA cells
-#' in the raster grid as a value between 0 and 1), and "grid" (the
+#' variation), "gini" (Gini coefficient), "openness" (proportion of empty
+#' cells inside the selected footprint as a value between 0 and 1), and "grid" (the
 #' rasterized height matrix). If `plot = TRUE`, an additional "plot" element
 #' containing a ggplot object is included. The plot legend title displays the
 #' canopy statistics using HTML-formatted text via `ggtext`.
@@ -28,6 +37,7 @@
 #' \dontrun{
 #' sphere <- gen_sphere(1, 0.01)
 #' stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
+#' circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ")
 #' }
 #'
 canopy_stats <- function(
@@ -35,10 +45,10 @@ canopy_stats <- function(
   res,
   lower_cutoff = NULL,
   plot = FALSE,
-  plot_title = NULL
+  plot_title = NULL,
+  footprint = NULL,
+  radius = NULL
 ) {
-  .validate_pt_cld(cloud)
-
   if (!is.numeric(res) || res <= 0) {
     stop("res must be a positive numeric value.")
   }
@@ -53,6 +63,21 @@ canopy_stats <- function(
   if (!is.logical(plot)) {
     stop("plot must be logical.")
   }
+  if (is.null(footprint)) {
+    footprint <- if (is.null(radius)) "rect" else "circ"
+  } else {
+    footprint <- match.arg(footprint, c("rect", "circ"))
+  }
+  if (!is.null(radius)) {
+    if (!is.numeric(radius) || length(radius) != 1 || !is.finite(radius) || radius <= 0) {
+      stop("radius must be a single positive numeric value.")
+    }
+    if (footprint != "circ") {
+      stop("radius can only be used when footprint = \"circ\".")
+    }
+  }
+
+  .validate_pt_cld(cloud)
 
   x_vox <- .round_n(cloud[, "x"], res)
   y_vox <- .round_n(cloud[, "y"], res)
@@ -94,7 +119,30 @@ canopy_stats <- function(
   for (i in seq_len(nrow(raster))) {
     grid[as.character(raster$y[i]), as.character(raster$x[i])] <- raster$z[i]
   }
-  out$openness <- sum(is.na(grid)) / length(grid)
+
+  openness_mask <- matrix(
+    TRUE,
+    nrow = length(yi), ncol = length(xi),
+    dimnames = list(yi, xi)
+  )
+  if (footprint == "circ") {
+    center_x <- mean(range(xi))
+    center_y <- mean(range(yi))
+    circle_radius <- radius
+    openness_mask <- outer(
+      yi,
+      xi,
+      FUN = function(y, x) {
+        (x - center_x)^2 + (y - center_y)^2 <= circle_radius^2 + sqrt(.Machine$double.eps)
+      }
+    )
+  }
+
+  n_footprint_cells <- sum(openness_mask)
+  if (n_footprint_cells == 0) {
+    stop("The selected footprint does not include any raster cells.")
+  }
+  out$openness <- sum(is.na(grid)[openness_mask]) / n_footprint_cells
   out$grid <- grid
 
   if (plot) {

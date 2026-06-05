@@ -2,7 +2,7 @@ test_that("canopy_stats returns expected list elements", {
   sphere <- gen_sphere(1, 0.01)
   result <- canopy_stats(sphere, res = 0.1, plot = FALSE)
   expect_type(result, "list")
-  expect_true(all(c("max", "mean", "sd", "cv", "gini", "grid") %in% names(result)))
+  expect_true(all(c("max", "mean", "sd", "cv", "gini", "openness", "grid") %in% names(result)))
 })
 
 test_that("canopy_stats max >= mean", {
@@ -42,4 +42,38 @@ test_that("canopy_stats grid is a matrix", {
   sphere <- gen_sphere(1, 0.01)
   result <- canopy_stats(sphere, res = 0.1, plot = FALSE)
   expect_true(is.matrix(result$grid))
+})
+
+test_that("canopy_stats treats radius as an explicit circular footprint", {
+  sphere <- gen_sphere(1, 0.1)
+
+  implicit <- canopy_stats(sphere, res = 0.1, radius = 1, plot = FALSE)
+  explicit <- canopy_stats(
+    sphere,
+    res = 0.1,
+    footprint = "circ",
+    radius = 1,
+    plot = FALSE
+  )
+
+  expect_equal(implicit$openness, explicit$openness)
+})
+
+test_that("canopy_stats validates circular footprint arguments", {
+  sphere <- gen_sphere(1, 0.1)
+
+  expect_error(
+    canopy_stats(sphere, res = 0.1, radius = -1, plot = FALSE),
+    "radius must be"
+  )
+  expect_error(
+    canopy_stats(
+      sphere,
+      res = 0.1,
+      footprint = "rect",
+      radius = 1,
+      plot = FALSE
+    ),
+    "radius can only be used"
+  )
 })
