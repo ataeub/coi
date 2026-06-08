@@ -1,5 +1,10 @@
 # coi (development version)
 
+## Changes in version 2.2.0
+
+- Added circular footprint support to `canopy_stats()` openness calculations via the `footprint` and `radius` arguments.
+- Clarified that circular footprints in `canopy_stats()` require an explicit `radius`, and updated examples and tests accordingly.
+
 ## Changes in version 2.1.0
 
 - Added `co_2d()` to extract relative 2D crown overlap (very similar to `coi()` just in 2D and without point distance weighting)
