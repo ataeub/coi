@@ -19,9 +19,8 @@
 #' openness to cells inside a circle centered on the raster extent. If
 #' `NULL` (default), `"rect"` is used unless `radius` is supplied, in
 #' which case `"circ"` is assumed.
-#' @param radius Optional numeric radius for a circular footprint. When
-#' `NULL` and `footprint = "circ"`, the radius is inferred from the
-#' rasterized canopy extent.
+#' @param radius Optional numeric radius for a circular footprint. A radius
+#' must be supplied whenever `footprint = "circ"`.
 #'
 #' @return A list with elements "max", "mean", "sd", "cv" (coefficient of
 #' variation), "gini" (Gini coefficient), "openness" (proportion of empty
@@ -37,7 +36,7 @@
 #' \dontrun{
 #' sphere <- gen_sphere(1, 0.01)
 #' stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
-#' circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ")
+#' circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ", radius = 1)
 #' }
 #'
 canopy_stats <- function(
@@ -67,6 +66,9 @@ canopy_stats <- function(
     footprint <- if (is.null(radius)) "rect" else "circ"
   } else {
     footprint <- match.arg(footprint, c("rect", "circ"))
+  }
+  if (footprint == "circ" && is.null(radius)) {
+    stop("radius must be supplied when footprint = \"circ\".")
   }
   if (!is.null(radius)) {
     if (!is.numeric(radius) || length(radius) != 1 || !is.finite(radius) || radius <= 0) {

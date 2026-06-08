@@ -35,9 +35,8 @@ openness to cells inside a circle centered on the raster extent. If
 \code{NULL} (default), \code{"rect"} is used unless \code{radius} is supplied, in
 which case \code{"circ"} is assumed.}
 
-\item{radius}{Optional numeric radius for a circular footprint. When
-\code{NULL} and \code{footprint = "circ"}, the radius is inferred from the
-rasterized canopy extent.}
+\item{radius}{Optional numeric radius for a circular footprint. A radius
+must be supplied whenever \code{footprint = "circ"}.}
 }
 \value{
 A list with elements "max", "mean", "sd", "cv" (coefficient of
@@ -57,7 +56,7 @@ threshold.
 \dontrun{
 sphere <- gen_sphere(1, 0.01)
 stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
-circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ")
+circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ", radius = 1)
 }
 
 }

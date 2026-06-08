@@ -67,6 +67,10 @@ test_that("canopy_stats validates circular footprint arguments", {
     "radius must be"
   )
   expect_error(
+    canopy_stats(sphere, res = 0.1, footprint = "circ", plot = FALSE),
+    "radius must be supplied"
+  )
+  expect_error(
     canopy_stats(
       sphere,
       res = 0.1,
