@@ -2,13 +2,22 @@
 
 Calculate various canopy height statistics from a point cloud rasterized
 to a grid. The cloud is snapped to a regular grid and the maximum height
-per cell is extracted. Statistics are computed for heights above a given
-threshold.
+per cell is extracted. Heights are computed relative to the minimum z
+value in the input cloud so vertical offsets do not affect the
+statistics.
 
 ## Usage
 
 ``` r
-canopy_stats(cloud, res, lower_cutoff = NULL, plot = FALSE, plot_title = NULL)
+canopy_stats(
+  cloud,
+  res,
+  lower_cutoff = NULL,
+  plot = FALSE,
+  plot_title = NULL,
+  footprint = NULL,
+  radius = NULL
+)
 ```
 
 ## Arguments
@@ -25,8 +34,9 @@ canopy_stats(cloud, res, lower_cutoff = NULL, plot = FALSE, plot_title = NULL)
 
 - lower_cutoff:
 
-  Numeric of the minimum canopy height threshold. Heights below this
-  value are excluded from statistics calculation.
+  Numeric of the minimum canopy height threshold. Cells whose maximum
+  height does not exceed this value are treated as empty for statistics,
+  openness, and plotting.
 
 - plot:
 
@@ -38,14 +48,29 @@ canopy_stats(cloud, res, lower_cutoff = NULL, plot = FALSE, plot_title = NULL)
   Character string for the plot title. Only used when `plot = TRUE`.
   Defaults to "Canopy Height Raster".
 
+- footprint:
+
+  Optional character string describing the footprint geometry used for
+  the openness calculation. Allowed values are `"rect"` and `"circ"`.
+  `"rect"` uses the full raster extent. `"circ"` limits openness to
+  cells inside a circle centered on the raster extent. If `NULL`
+  (default), `"rect"` is used unless `radius` is supplied, in which case
+  `"circ"` is assumed.
+
+- radius:
+
+  Optional numeric radius for a circular footprint. A radius must be
+  supplied whenever `footprint = "circ"`.
+
 ## Value
 
 A list with elements "max", "mean", "sd", "cv" (coefficient of
-variation), "gini" (Gini coefficient), "openness" (proportion of NA
-cells in the raster grid as a value between 0 and 1), and "grid" (the
-rasterized height matrix). If `plot = TRUE`, an additional "plot"
-element containing a ggplot object is included. The plot legend title
-displays the canopy statistics using HTML-formatted text via `ggtext`.
+variation), "gini" (Gini coefficient), "openness" (proportion of empty
+cells inside the selected footprint as a value between 0 and 1), and
+"grid" (the rasterized height matrix). If `plot = TRUE`, an additional
+"plot" element containing a ggplot object is included. The plot legend
+title displays the canopy statistics using HTML-formatted text via
+`ggtext`.
 
 ## Examples
 
@@ -53,5 +78,6 @@ displays the canopy statistics using HTML-formatted text via `ggtext`.
 if (FALSE) { # \dontrun{
 sphere <- gen_sphere(1, 0.01)
 stats <- canopy_stats(sphere, res = 0.1, lower_cutoff = 0.5, plot = FALSE)
+circular_stats <- canopy_stats(sphere, res = 0.1, footprint = "circ", radius = 1)
 } # }
 ```
