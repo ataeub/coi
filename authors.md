@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/ataeub/coi/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/ataeub/coi/blob/v.2.3.0/inst/CITATION)
 
 Täuber A, Fichtner A, Bruelheide H, Davrinche A, Haider S, Käcks T, Liu
 X, Ray T, von Oheimb G (2026). “Tree-Tree Interactions Revisited - A
