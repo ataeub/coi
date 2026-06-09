@@ -2,13 +2,14 @@
 #'
 #' Calculate various canopy height statistics from a point cloud rasterized
 #' to a grid. The cloud is snapped to a regular grid and the maximum height
-#' per cell is extracted. Statistics are computed for heights above a given
-#' threshold.
+#' per cell is extracted. Heights are computed relative to the minimum z value
+#' in the input cloud so vertical offsets do not affect the statistics.
 #'
 #' @param cloud A `pt_cld` object. Use [as_pt_cld()] to convert.
 #' @param res Numeric of the grid resolution for rasterization.
-#' @param lower_cutoff Numeric of the minimum canopy height threshold. Heights
-#' below this value are excluded from statistics calculation.
+#' @param lower_cutoff Numeric of the minimum canopy height threshold. Cells
+#' whose maximum height does not exceed this value are treated as empty for
+#' statistics, openness, and plotting.
 #' @param plot Logical controlling whether to plot the rasterized canopy height
 #' grid. Defaults to FALSE.
 #' @param plot_title Character string for the plot title. Only used when
@@ -83,15 +84,16 @@ canopy_stats <- function(
 
   x_vox <- .round_n(cloud[, "x"], res)
   y_vox <- .round_n(cloud[, "y"], res)
-  z <- cloud[, "z"]
+  z <- cloud[, "z"] - min(cloud[, "z"])
 
   cells <- data.frame(x = x_vox, y = y_vox, z = z)
-  raster <- stats::aggregate(z ~ x + y, data = cells, FUN = max)
+  full_raster <- stats::aggregate(z ~ x + y, data = cells, FUN = max)
+  raster <- full_raster
 
-  canopy_heights <- raster$z
   if (!is.null(lower_cutoff)) {
-    canopy_heights <- canopy_heights[canopy_heights > lower_cutoff]
+    raster <- raster[raster$z > lower_cutoff, , drop = FALSE]
   }
+  canopy_heights <- raster$z
 
   if (length(canopy_heights) == 0) {
     warning("No canopy heights found above lower_cutoff. Statistics will be NA.")
@@ -112,8 +114,8 @@ canopy_stats <- function(
   )
   out <- stats
 
-  xi <- sort(unique(raster$x))
-  yi <- sort(unique(raster$y))
+  xi <- sort(unique(full_raster$x))
+  yi <- sort(unique(full_raster$y))
   grid <- matrix(NA,
     nrow = length(yi), ncol = length(xi),
     dimnames = list(yi, xi)

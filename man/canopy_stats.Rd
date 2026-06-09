@@ -19,8 +19,9 @@ canopy_stats(
 
 \item{res}{Numeric of the grid resolution for rasterization.}
 
-\item{lower_cutoff}{Numeric of the minimum canopy height threshold. Heights
-below this value are excluded from statistics calculation.}
+\item{lower_cutoff}{Numeric of the minimum canopy height threshold. Cells
+whose maximum height does not exceed this value are treated as empty for
+statistics, openness, and plotting.}
 
 \item{plot}{Logical controlling whether to plot the rasterized canopy height
 grid. Defaults to FALSE.}
@@ -49,8 +50,8 @@ canopy statistics using HTML-formatted text via \code{ggtext}.
 \description{
 Calculate various canopy height statistics from a point cloud rasterized
 to a grid. The cloud is snapped to a regular grid and the maximum height
-per cell is extracted. Statistics are computed for heights above a given
-threshold.
+per cell is extracted. Heights are computed relative to the minimum z value
+in the input cloud so vertical offsets do not affect the statistics.
 }
 \examples{
 \dontrun{

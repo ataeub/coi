@@ -19,6 +19,36 @@ test_that("canopy_stats with lower_cutoff filters heights", {
   expect_true(r2$mean >= r1$mean)
 })
 
+test_that("canopy_stats applies lower_cutoff to openness and plotting", {
+  cloud <- pt_cld(
+    x = c(0, 1, 0, 1),
+    y = c(0, 0, 1, 1),
+    z = c(0, 5, 2, 6)
+  )
+
+  result <- canopy_stats(cloud, res = 1, lower_cutoff = 3, plot = TRUE)
+
+  expect_equal(result$openness, 0.5)
+  expect_equal(sum(!is.na(result$grid)), 2)
+  expect_true(is.na(result$grid["0", "0"]))
+  expect_true(is.na(result$grid["1", "0"]))
+  expect_equal(nrow(result$plot$data), 2)
+})
+
+test_that("canopy_stats uses z values relative to the cloud minimum", {
+  base <- pt_cld(
+    x = c(0, 0, 1, 1),
+    y = c(0, 0, 0, 0),
+    z = c(0, 2, 1, 3)
+  )
+  shifted <- pt_cld(base[, "x"], base[, "y"], base[, "z"] + 10)
+
+  base_stats <- canopy_stats(base, res = 1, lower_cutoff = 2.5, plot = FALSE)
+  shifted_stats <- canopy_stats(shifted, res = 1, lower_cutoff = 2.5, plot = FALSE)
+
+  expect_equal(shifted_stats, base_stats)
+})
+
 test_that("canopy_stats warns when all heights below cutoff", {
   sphere <- gen_sphere(1, 0.01)
   expect_warning(
