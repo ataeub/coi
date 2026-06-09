@@ -1,5 +1,10 @@
 # coi (development version)
 
+## Changes in version 2.3.0
+
+- Fix bug that parts cut away by `lower_cutoff` are not recognized as empty 
+- Fixed minor bugs in logic of `canopy_stats()`
+
 ## Changes in version 2.2.0
 
 - Added circular footprint support to `canopy_stats()` openness calculations via the `footprint` and `radius` arguments.

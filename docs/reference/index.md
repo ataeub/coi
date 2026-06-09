@@ -27,6 +27,8 @@
 - [`compute_coi()`](https://ataeub.github.io/coi/reference/compute_coi.md)
   : Compute the crown overlap index (COI) for a vector with interaction
   distances.
+- [`co_2d()`](https://ataeub.github.io/coi/reference/co_2d.md) : Compute
+  a projected 2D crown overlap index for two point clouds.
 - [`enl()`](https://ataeub.github.io/coi/reference/enl.md) : Compute the
   Effective Number of Layers (ENL) for a voxelized point cloud.
 - [`extract_dtm()`](https://ataeub.github.io/coi/reference/extract_dtm.md)

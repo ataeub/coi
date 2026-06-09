@@ -2,6 +2,30 @@
 
 ## coi (development version)
 
+### Changes in version 2.3.0
+
+- Fix bug that parts cut away by `lower_cutoff` are not recognized as
+  empty
+- Fixed minor bugs in logic of
+  [`canopy_stats()`](https://ataeub.github.io/coi/reference/canopy_stats.md)
+
+### Changes in version 2.2.0
+
+- Added circular footprint support to
+  [`canopy_stats()`](https://ataeub.github.io/coi/reference/canopy_stats.md)
+  openness calculations via the `footprint` and `radius` arguments.
+- Clarified that circular footprints in
+  [`canopy_stats()`](https://ataeub.github.io/coi/reference/canopy_stats.md)
+  require an explicit `radius`, and updated examples and tests
+  accordingly.
+
+### Changes in version 2.1.0
+
+- Added [`co_2d()`](https://ataeub.github.io/coi/reference/co_2d.md) to
+  extract relative 2D crown overlap (very similar to
+  [`coi()`](https://ataeub.github.io/coi/reference/coi.md) just in 2D
+  and without point distance weighting)
+
 ### Changes in version 2.0.0
 
 #### New functionality
