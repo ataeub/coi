@@ -2,6 +2,13 @@
 
 ## coi (development version)
 
+### Changes in version 2.3.0
+
+- Fix bug that parts cut away by `lower_cutoff` are not recognized as
+  empty
+- Fixed minor bugs in logic of
+  [`canopy_stats()`](https://ataeub.github.io/coi/reference/canopy_stats.md)
+
 ### Changes in version 2.2.0
 
 - Added circular footprint support to
