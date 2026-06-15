@@ -15,7 +15,8 @@ coi(cloud_i, cloud_j, d_max, vox_res = NULL, warnings = TRUE)
 
 \item{d_max}{Numeric of the maximum distance of interaction. Decides how far
 away points of one tree can be from the other before they are excluded from
-the interaction cloud.}
+the interaction cloud. Set to 0 if only exact point or voxel matches should
+contribute.}
 
 \item{vox_res}{Numeric of the resolution for voxelization during
 pre-processing. If left undefined (default), the raw clouds will be analzed,

@@ -8,7 +8,7 @@
 #' @param cloud_i First point cloud as a `pt_cld` object (see [as_pt_cld()]).
 #' @param cloud_j Second point cloud as a `pt_cld` object (see [as_pt_cld()]).
 #' @param d_max Numeric of the maximum distance to consider for nearest neighbor
-#' search.
+#' search. Set to 0 if only exact point or voxel matches should be returned.
 #' @param returns Character, either "distances" (default) to return a vector of
 #' distances (to use in `calculate_coi()`), or "cloud" to return the combined
 #' cloud with distances (useful when extracted interaction point cloud needs to

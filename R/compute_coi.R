@@ -15,7 +15,10 @@
 #' @param size_weight Numeric of the size (Number of points/voxels) of both
 #' clouds from which the interaction distances were computed.
 #' @param d_max Numeric of the maximum distance of interaction used to extract
-#' the interaction distances with `extract_interaction()`.
+#' the interaction distances with `extract_interaction()`. Set to 0 if only
+#' exact point or voxel matches should contribute to the COI.
+#' When `d_max = 0`, an all-zero interaction vector is treated as valid and
+#' does not trigger a warning.
 #' @return Numeric representing the COI.
 #' @export
 #' @examples
@@ -43,13 +46,17 @@ compute_coi <- function(distances, size_weight, d_max) {
     )
   }
   if (distances_max == 0) {
-    warning(
-      "All measured distances equal 0, which suggests that the ",
-      "interaction was extracted for two identical clouds! Please check data ",
-      "carefully."
-    )
+    if (d_max != 0) {
+      warning(
+        "All measured distances equal 0 and dmax is not 0, which suggests that",
+        "the interaction was extracted for two identical clouds! Please check ",
+        "data carefully!"
+      )
+    }
+    coi_value <- length(distances) / size_weight
+  } else {
+    coi_value <- sum(1 - (distances / d_max)) / size_weight
   }
 
-  coi_value <- sum(1 - (distances / d_max)) / size_weight
   coi_value
 }

@@ -12,7 +12,7 @@ extract_interaction(cloud_i, cloud_j, d_max, returns = c("distances", "cloud"))
 \item{cloud_j}{Second point cloud as a \code{pt_cld} object (see \code{\link[=as_pt_cld]{as_pt_cld()}}).}
 
 \item{d_max}{Numeric of the maximum distance to consider for nearest neighbor
-search.}
+search. Set to 0 if only exact point or voxel matches should be returned.}
 
 \item{returns}{Character, either "distances" (default) to return a vector of
 distances (to use in \code{calculate_coi()}), or "cloud" to return the combined

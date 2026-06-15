@@ -19,3 +19,8 @@ test_that("compute_coi errors on negative distances", {
 test_that("compute_coi warns on all-zero distances", {
   expect_warning(compute_coi(c(0, 0, 0), 100, 1), "All measured distances equal 0")
 })
+
+test_that("compute_coi accepts all-zero distances when d_max is zero", {
+  expect_no_warning(result <- compute_coi(c(0, 0, 0), 6, 0))
+  expect_equal(result, 0.5)
+})

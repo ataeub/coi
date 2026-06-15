@@ -1,6 +1,6 @@
 Package: coi
 Title: Extract Tree-Tree Interaction Metrics from TLS Point Clouds
-Version: 2.3.0
+Version: 2.4.0
 Authors@R:
     person("Alexander", "Täuber", , "alexander.taeuber@idiv.de", role = c("aut", "cre", "cph"))
 Description: 
@@ -36,3 +36,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0
+RoxygenNote: 7.3.3

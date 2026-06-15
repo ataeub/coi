@@ -14,7 +14,10 @@ compute_coi(distances, size_weight, d_max)
 clouds from which the interaction distances were computed.}
 
 \item{d_max}{Numeric of the maximum distance of interaction used to extract
-the interaction distances with \code{extract_interaction()}.}
+the interaction distances with \code{extract_interaction()}. Set to 0 if only
+exact point or voxel matches should contribute to the COI.
+When \code{d_max = 0}, an all-zero interaction vector is treated as valid and
+does not trigger a warning.}
 }
 \value{
 Numeric representing the COI.
