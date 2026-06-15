@@ -2,6 +2,12 @@
 
 ## coi (development version)
 
+### Changes in version 2.4.0
+
+- Added correct behaviour for
+  [`compute_coi()`](https://ataeub.github.io/coi/reference/compute_coi.md)
+  when `d_max` is set to 0
+
 ### Changes in version 2.3.0
 
 - Fix bug that parts cut away by `lower_cutoff` are not recognized as

@@ -26,7 +26,8 @@ coi(cloud_i, cloud_j, d_max, vox_res = NULL, warnings = TRUE)
 
   Numeric of the maximum distance of interaction. Decides how far away
   points of one tree can be from the other before they are excluded from
-  the interaction cloud.
+  the interaction cloud. Set to 0 if only exact point or voxel matches
+  should contribute.
 
 - vox_res:
 

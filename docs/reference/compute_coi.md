@@ -28,6 +28,9 @@ compute_coi(distances, size_weight, d_max)
   Numeric of the maximum distance of interaction used to extract the
   interaction distances with
   [`extract_interaction()`](https://ataeub.github.io/coi/reference/extract_interaction.md).
+  Set to 0 if only exact point or voxel matches should contribute to the
+  COI. When `d_max = 0`, an all-zero interaction vector is treated as
+  valid and does not trigger a warning.
 
 ## Value
 

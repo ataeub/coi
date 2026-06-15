@@ -27,7 +27,8 @@ extract_interaction(cloud_i, cloud_j, d_max, returns = c("distances", "cloud"))
 - d_max:
 
   Numeric of the maximum distance to consider for nearest neighbor
-  search.
+  search. Set to 0 if only exact point or voxel matches should be
+  returned.
 
 - returns:
 

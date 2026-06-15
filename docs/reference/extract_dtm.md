@@ -33,7 +33,8 @@ extract_dtm(
 
 - sm_type:
 
-  (character) Smoothing algorithm type; passed to `Rvcg::vcgSmooth()`.
+  (character) Smoothing algorithm type; passed to
+  [`Rvcg::vcgSmooth()`](https://rdrr.io/pkg/Rvcg/man/vcgSmooth.html).
   Options include "taubin", "laplace", "fuhrmann", etc. Default: NULL
 
 - sm_i:

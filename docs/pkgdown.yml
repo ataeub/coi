@@ -1,9 +1,9 @@
-pandoc: '3.10'
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   coi_demonstration: coi_demonstration.html
-last_built: 2026-06-09T08:46Z
+last_built: 2026-06-15T15:28Z
 urls:
   reference: https://ataeub.github.io/coi/reference
   article: https://ataeub.github.io/coi/articles
